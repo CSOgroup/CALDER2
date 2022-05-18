@@ -114,7 +114,7 @@ CALDER_sub_domains(intermediate_data_file,
 | Parameters              | Description | Examaple              |                
 | --------------------- | ----------------------- | ----------------------- |
 | **chrs**                | A vector of chromosome names to be analyzed, with or without 'chr' | `chrs = c(21:22, 'X')` or `chrs = 'chrX'`
-| **contact_file_straw**                |A list of contact files in dump format, named by `chrs` |
+| **contact_file_straw**                |A list of contact files in dump format, named by `chrs` |`contact_file_straw = as.list(system.file("extdata", sprintf("mat_chr%s_10kb_ob.txt.gz", chrs), package='CALDER')); names(contact_file_straw) = chrs`
 | **contact_tab_straw**                |      xx     |xx
 | **ref_genome**                | One of 'hg19', 'hg38', 'mm9', 'mm10', 'others' (default). |
 | **annotation_track**                | A genomic annotation track in data.frame or data.table format. This track will be used for determing the A/B compartment direction and should presumably have higher values | in A than in B compartment. Some suggested tracks can be: 
