@@ -121,7 +121,7 @@ CALDER_sub_domains(intermediate_data_file,
 | **bin_size**         | numeric, the size of a bin in consistent with the contact table
 | **save_dir**             | the directory to save outputs
 | **save_intermediate_data**  | logical. If TRUE, an intermediate_data will be saved. This file can be used for computing nested sub-domains later on
-| **enrich**     |  Perform gene enrichment analysis (GSEA) of genes in differential compartments/loops
+| **n_cores**     |  integer. Number of cores to be registered for running CALDER in parallel
 
 
 ### Output:
