@@ -5,9 +5,9 @@ CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from w
 
 ![Alt text](./img/CALDER_methods.png "CALDER methods")
 
-# Updates in CALDER_v2
+# Updates in CALDER2.0
 
-## We added multiple new features in CALDER_v2:
+## We added multiple new features in CALDER2.0:
 
 * Support for various genomes. 
 * Opimized resolution selection. Although compartments can change between different cell conditions, from our large scale analysis we found the overall correlation between two conditions are high. We input compartment of reference dataset. When the computed compartment has low correlation with this reference, it indicates false calling.
