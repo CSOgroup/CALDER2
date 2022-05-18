@@ -117,7 +117,7 @@ CALDER_sub_domains(intermediate_data_file,
 | **ref_genome**                | One of 'hg19', 'hg38', 'mm9', 'mm10', 'others' (default). 
 | **annotation_track**                | A genomic annotation track in data.frame or data.table format. This track will be used for determing the A/B compartment direction and should presumably have higher values in A than in B compartment. Some suggested tracks can be: 
 | **contact_file_hic**                | Path to the hic
-| **chrs**                | chromosome names to be analyzed
+| **chrs**                | A vector of chromosome names to be analyzed, with or without 'chr'. e.g., `chrs = c(21:22, 'X')` or `chrs = 'chrX'`
 | **bin_size**         | numeric, the size of a bin in consistent with the contact table
 | **save_dir**             | the directory to save outputs
 | **save_intermediate_data**  | logical. If TRUE, an intermediate_data will be saved. This file can be used for computing nested sub-domains later on
@@ -148,7 +148,7 @@ CALDER_sub_domains(intermediate_data_file,
 
 
 ## Output Structure
-The output of the workflow is stored in the folder specified by `--out_dir` ("results" by default) and will look like this:
+The output of the workflow is stored in the folder specified by `--save_dir` ("results" by default) and will look like this:
 ```
 results/
 └── HiC_sample_1
