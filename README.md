@@ -113,12 +113,12 @@ CALDER_sub_domains(intermediate_data_file,
 
 | Parameters              | Description | Examaple              |                
 | --------------------- | ----------------------- | ----------------------- |
-| **contact_tab_straw**                |      xx     |xx
+| **chrs**                | A vector of chromosome names to be analyzed, with or without 'chr' | `chrs = c(21:22, 'X')` or `chrs = 'chrX'`
+| **contact_file_straw**                |A list of contact files in dump format, named by `chrs` |
 | **contact_tab_straw**                |      xx     |xx
 | **ref_genome**                | One of 'hg19', 'hg38', 'mm9', 'mm10', 'others' (default). |
 | **annotation_track**                | A genomic annotation track in data.frame or data.table format. This track will be used for determing the A/B compartment direction and should presumably have higher values | in A than in B compartment. Some suggested tracks can be: 
 | **contact_file_hic**                | Path to the hic
-| **chrs**                | A vector of chromosome names to be analyzed, with or without 'chr' | `chrs = c(21:22, 'X')` or `chrs = 'chrX'`
 | **bin_size**         | numeric, the size of a bin in consistent with the contact table
 | **save_dir**             | the directory to save outputs
 | **save_intermediate_data**  | logical. If TRUE, an intermediate_data will be saved. This file can be used for computing nested sub-domains later on
