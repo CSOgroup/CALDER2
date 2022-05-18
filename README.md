@@ -115,7 +115,7 @@ CALDER_sub_domains(intermediate_data_file,
 | --------------------- | ----------------------- |
 | **contact_tab_straw**                | 
 | **ref_genome**                | One of 'hg19', 'hg38', 'mm9', 'mm10', 'others' (default). 
-| **annotation_track**                | A table in data.frame or data.table format
+| **annotation_track**                | A genomic annotation track in data.frame or data.table format. This track will be used to define the A/B compartment direction and should be presumably have higher values in A compartment.  
 | **contact_file_hic**                | Path to the hic
 | **chrs**                | chromosome names to be analyzed
 | **bin_size**         | numeric, the size of a bin in consistent with the contact table
