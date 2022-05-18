@@ -1,6 +1,7 @@
 # CALDER user manuel
 
 CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from whole chromosome contacts; (2) derive their non-linear hierarchical organization and obtain sub-compartments; (3) compute nested sub-domains within each chromatin domain from short-range contacts. CALDER is currently implemented in R.
+(Trough out the CALDER package, 'bin_size' means the size of the Hi-C contacts is binned, and is equivalent to 'resoltution' in the literature)
 
 
 ![Alt text](./img/CALDER_methods.png "CALDER methods")
@@ -14,7 +15,6 @@ CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from w
 * Added output in tabular .txt format at bin level for downstream analysis
 
 ## Introduction of opitimized bin_size selection
-(Trough out the CALDER package, 'bin_size' means the size of the Hi-C contacts is binned, and is equivalent to 'resoltution' in the literature)
 
 We added an opitimized bin_size selection strategy for the purpose of calling reliable compartments at high resolution. This is based on the observation from our large scale compartment analysis that, although compartments can change between different conditions, their overall consistency is high. Due to reasons such as low data resolution or large scale structrual variation, compartments can be unrealiablly called at a given bin_size but can be captured at another bin_size. Thus we try mutiple `bin_sizes` and choose the compartments called at the smallest `bin_size` value, if for any bigger `bin_size` the correlation b 
 
