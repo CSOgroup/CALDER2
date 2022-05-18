@@ -112,7 +112,6 @@ CALDER_sub_domains(intermediate_data_file,
 * `genome`: string. Specifies the genome assembly (Default="hg19").
 
 | Parameters              | Description                 
-| --------------------- | ----------------------- |
 | **contact_tab_straw**                | 
 | **ref_genome**                | One of 'hg19', 'hg38', 'mm9', 'mm10', or 'others' by default. 
 | **annotation_track**                | A table in data.frame or data.table format
