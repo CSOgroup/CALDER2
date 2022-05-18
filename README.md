@@ -111,7 +111,7 @@ CALDER_sub_domains(intermediate_data_file,
 * `save_intermediate_data`: logical. If TRUE, an intermediate_data will be saved. This file can be used for computing nested sub-domains later on
 * `genome`: string. Specifies the genome assembly (Default="hg19").
 
-| --Parameters              | Meaning                 
+| Parameters              | Description                 
 | --------------------- | ----------------------- |
 | **cis**                | Find compartments on a cis interaction matrix
 | **trans**                | Find compartments on a trans interaction matrix
