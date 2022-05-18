@@ -16,10 +16,18 @@ CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from w
 ## Introduction of opitimized bin_size selection
 ('bin_size' is equivalent to 'resoltution')
 
-We developed the opitimized bin_size selection method for the purpose of calling reliable compartments at high resolution. 
+We added an opitimized bin_size selection strategy for the purpose of calling reliable compartments at high resolution. 
 
 High quality compartment calls were generated for 'hg19' (hic data from GSE63525), 'hg38' (hic data from https://data.4dnucleome.org/files-processed/4DNFI1UEG1HD/), 'mm9' (hic data from GSM3959427), 'mm10' (hic data from http://hicfiles.s3.amazonaws.com/external/bonev/CN_mapq30.hic)
 
+```
+if(bin_size==5E3) bin_sizes = c(5E3, 10E3, 50E3, 100E3)
+if(bin_size==10E3) bin_sizes = c(10E3, 50E3, 100E3)
+if(bin_size==20E3) bin_sizes = c(20E3, 40E3, 100E3)
+if(bin_size==25E3) bin_sizes = c(25E3, 50E3, 100E3)
+if(bin_size==40E3) bin_sizes = c(40E3, 80E3)
+if(bin_size==50E3) bin_sizes = c(50E3, 100E3)
+```
 
 # Installation
 
