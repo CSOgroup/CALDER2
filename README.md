@@ -117,10 +117,10 @@ CALDER_sub_domains(intermediate_data_file,
 | **ref_genome**                | One of 'hg19', 'hg38', 'mm9', 'mm10', 'others' (default). 
 | **annotation_track**                | A table in data.frame or data.table format
 | **contact_file_hic**                | Path to the hic
-| **chrs**                | vector of character or numeric. Chromosome names to be analyzed. 
+| **chrs**                | chromosome names to be analyzed
 | **bin_size**         | numeric, the size of a bin in consistent with the contact table
-| **dloop**             | Find differential loops anchored in at least one of the differential compartments across the samples (Optional but recommended)
-| **viz**  | Generate IGV vizualization HTML file. Must have performed other steps in order (optional ones not strictly necessary) before this one.
+| **save_dir**             | the directory to save outputs
+| **save_intermediate_data**  | logical. If TRUE, an intermediate_data will be saved. This file can be used for computing nested sub-domains later on
 | **enrich**     |  Perform gene enrichment analysis (GSEA) of genes in differential compartments/loops
 
 
