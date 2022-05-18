@@ -112,18 +112,9 @@ CALDER_sub_domains(intermediate_data_file,
 * `genome`: string. Specifies the genome assembly (Default="hg19").
 
 | Parameters              | Description | Parameters              |                
-| --------------------- | ----------------------- |
-| **contact_tab_straw**                | 
-| **ref_genome**                | One of 'hg19', 'hg38', 'mm9', 'mm10', 'others' (default). 
-| **annotation_track**                | A genomic annotation track in data.frame or data.table format. This track will be used for determing the A/B compartment direction and should presumably have higher values in A than in B compartment. Some suggested tracks can be: 
-| **contact_file_hic**                | Path to the hic
-| **chrs**                | A vector of chromosome names to be analyzed, with or without 'chr'. e.g., `chrs = c(21:22, 'X')` or `chrs = 'chrX'`
-| **bin_size**         | numeric, the size of a bin in consistent with the contact table
-| **save_dir**             | the directory to save outputs
-| **save_intermediate_data**  | logical. If TRUE, an intermediate_data will be saved. This file can be used for computing nested sub-domains later on
-| **n_cores**     |  integer. Number of cores to be registered for running CALDER in parallel
-| **single_binsize_only**     |  logical. If TRUE, CALDER will compute compartments only using the bin_size specified by the user and not do bin size optimization
-| **sub_domains**     |  logical, whether to compute nested sub-domains
+| --------------------- | ----------------------- | ----------------------- |
+| **contact_tab_straw**                | **contact_tab_straw**                
+
 
 
 ### Output:
