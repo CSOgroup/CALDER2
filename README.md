@@ -114,11 +114,11 @@ CALDER_sub_domains(intermediate_data_file,
 | Parameters              | Description                 
 | --------------------- | ----------------------- |
 | **contact_tab_straw**                | 
-| **ref_genome**                | One of 'hg19', 'hg38', 'mm9', 'mm10', or 'others' by default. 
+| **ref_genome**                | One of 'hg19', 'hg38', 'mm9', 'mm10', 'others' (default). 
 | **annotation_track**                | A table in data.frame or data.table format
 | **contact_file_hic**                | Path to the hic
-| **subcomp**                | Optional: Assigning sub-compartments based on PC magnitude values using HMM segmentation 
-| **fithic**         | Run [Fit-Hi-C](https://github.com/ay-lab/fithic) to identify loops before running dloop (Optional but recommended)
+| **chrs**                | vector of character or numeric. Chromosome names to be analyzed. 
+| **bin_size**         | numeric, the size of a bin in consistent with the contact table
 | **dloop**             | Find differential loops anchored in at least one of the differential compartments across the samples (Optional but recommended)
 | **viz**  | Generate IGV vizualization HTML file. Must have performed other steps in order (optional ones not strictly necessary) before this one.
 | **enrich**     |  Perform gene enrichment analysis (GSEA) of genes in differential compartments/loops
