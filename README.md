@@ -14,7 +14,7 @@ CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from w
 * Aggregated all chromosome output into a single file
 
 ## Introduction of opitimized bin_size selection
-('bin_size' is equivalent to 'resoltution')
+(Trough out the CALDER package, 'bin_size' means the size of the Hi-C contacts is binned, and is equivalent to 'resoltution' in the literature)
 
 We added an opitimized bin_size selection strategy for the purpose of calling reliable compartments at high resolution. 
 
