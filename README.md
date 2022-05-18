@@ -30,7 +30,7 @@ if(bin_size==25E3) bin_sizes = c(25E3, 50E3, 100E3)
 if(bin_size==40E3) bin_sizes = c(40E3, 80E3)
 if(bin_size==50E3) bin_sizes = c(50E3, 100E3)
 ```
-High quality reference compartments were generated for `hg19` (hic data from GSE63525), `hg38` (hic data from https://data.4dnucleome.org/files-processed/4DNFI1UEG1HD/), `mm9` (hic data from GSM3959427), `mm10` (hic data from http://hicfiles.s3.amazonaws.com/external/bonev/CN_mapq30.hic)
+Note taht this strategy is currently only available for the `hg19`, `hg38`, `mm9`, `mm10` genome for which we generated high quality reference compartments, using Hi-C data: from GSE63525 for `hg19`, from https://data.4dnucleome.org/files-processed/4DNFI1UEG1HD/ for `hg38`, from GSM3959427 for `mm9`, from http://hicfiles.s3.amazonaws.com/external/bonev/CN_mapq30.hic for `mm10`.
 
 
 # Installation
