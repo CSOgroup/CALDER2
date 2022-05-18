@@ -111,6 +111,19 @@ CALDER_sub_domains(intermediate_data_file,
 * `save_intermediate_data`: logical. If TRUE, an intermediate_data will be saved. This file can be used for computing nested sub-domains later on
 * `genome`: string. Specifies the genome assembly (Default="hg19").
 
+| --Parameters              | Meaning                 
+| --------------------- | ----------------------- |
+| **cis**                | Find compartments on a cis interaction matrix
+| **trans**                | Find compartments on a trans interaction matrix
+| **select**                | Selection of best PC for downstream analysis [Must be after cis or trans step]
+| **analyze**                | Perform differential analysis on selected PC's [Must be after select step]
+| **subcomp**                | Optional: Assigning sub-compartments based on PC magnitude values using HMM segmentation 
+| **fithic**         | Run [Fit-Hi-C](https://github.com/ay-lab/fithic) to identify loops before running dloop (Optional but recommended)
+| **dloop**             | Find differential loops anchored in at least one of the differential compartments across the samples (Optional but recommended)
+| **viz**  | Generate IGV vizualization HTML file. Must have performed other steps in order (optional ones not strictly necessary) before this one.
+| **enrich**     |  Perform gene enrichment analysis (GSEA) of genes in differential compartments/loops
+
+
 ### Output:
 
 #### chrxx_domain_hierachy.tsv
