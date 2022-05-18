@@ -1,5 +1,5 @@
 
-    CALDER_v2 = function(contact_tab_straw=NULL, contact_file_straw=NULL, contact_file_hic=NULL, chrs, bin_size, save_dir, save_intermediate_data=FALSE, swap_AB=0, ref_genome=c("hg19", 'hg38', "mm10", 'dm6')[1], annotation_track=NULL, black_list_bins=NULL, n_cores=1, sub_domains=FALSE, single_binsize_only=FALSE)
+    CALDER = function(contact_tab_dump=NULL, contact_file_dump=NULL, contact_file_hic=NULL, chrs, bin_size, save_dir, save_intermediate_data=FALSE, swap_AB=0, ref_genome=c("hg19", 'hg38', "mm10", 'dm6')[1], annotation_track=NULL, black_list_bins=NULL, n_cores=1, sub_domains=FALSE, single_binsize_only=FALSE)
     {
     		########################### https://stackoverflow.com/questions/30216613/how-to-use-dopar-when-only-import-foreach-in-description-of-a-package
 
@@ -8,18 +8,21 @@
 
     		###########################
 
+            chrs = as.character(chrs)
             n_chrs = length(chrs)
 
-            if(n_chrs > 1) ## when computing for multiple chrs, contact_tab_straw or contact_file_straw should be a list with elements matching to that of chrs
+            if(n_chrs > 1) ## when computing for multiple chrs, contact_tab_dump or contact_file_dump should be a list with elements matching to that of chrs
             {
-            	if(!is.null(contact_tab_straw))
+            	if(!is.null(contact_tab_dump))
             	{
-            		if(class(contact_tab_straw)!='list' | length(contact_tab_straw)!=n_chrs) stop('contact_tab_straw should be a list of contact table with its length equal to the length of chrs you specified\n')
+            		if(class(contact_tab_dump)!='list' | length(contact_tab_dump)!=n_chrs) stop('contact_tab_dump should be a list of contact table with its length equal to the length of chrs you specified\n')
+                    names(contact_tab_dump) = chrs
             	}
 
-            	if(!is.null(contact_file_straw))
+            	if(!is.null(contact_file_dump))
             	{
-            		if(class(contact_file_straw)!='list' | length(contact_file_straw)!=n_chrs) stop('contact_file_straw should be a list of contact table with its length equal to the length of chrs you specified\n')
+            		if(class(contact_file_dump)!='list' | length(contact_file_dump)!=n_chrs) stop('contact_file_dump should be a list of contact table with its length equal to the length of chrs you specified\n')
+                    names(contact_file_dump) = chrs
             	}
             }
 
@@ -66,7 +69,7 @@
 
             	save_intermediate_data_tmp = save_intermediate_data*(bin_size2look==bin_size)
 
-	            CALDER_CD_hierarchy_v2(contact_tab_straw=contact_tab_straw, contact_file_straw=contact_file_straw, contact_file_hic=contact_file_hic, chr=chr, bin_size_input=bin_size, bin_size2look=bin_size2look, save_dir=save_dir_binsize, save_intermediate_data=save_intermediate_data_tmp, swap_AB=swap_AB, ref_compartment_file=ref_compartment_file, annotation_track=annotation_track, black_list_bins=black_list_bins)
+	            CALDER_CD_hierarchy_v2(contact_tab_dump=contact_tab_dump[[chr]], contact_file_dump=contact_file_dump[[chr]], contact_file_hic=contact_file_hic, chr=chr, bin_size_input=bin_size, bin_size2look=bin_size2look, save_dir=save_dir_binsize, save_intermediate_data=save_intermediate_data_tmp, swap_AB=swap_AB, ref_compartment_file=ref_compartment_file, annotation_track=annotation_track, black_list_bins=black_list_bins)
 	        }
 
             ########################### build optimal compartment from multiple resolutions

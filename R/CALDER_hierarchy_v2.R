@@ -119,7 +119,7 @@
 		# }
 
 
-		CALDER_CD_hierarchy_v2 = function(contact_tab_straw=NULL, contact_file_straw=NULL, contact_file_hic=NULL, chr, bin_size_input, bin_size2look, save_dir, save_intermediate_data=FALSE, swap_AB, ref_compartment_file, black_list_bins=NULL, annotation_track=NULL)
+		CALDER_CD_hierarchy_v2 = function(contact_tab_dump=NULL, contact_file_dump=NULL, contact_file_hic=NULL, chr, bin_size_input, bin_size2look, save_dir, save_intermediate_data=FALSE, swap_AB, ref_compartment_file, black_list_bins=NULL, annotation_track=NULL)
 		{
 			chr_num = gsub('chr', '', chr, ignore.case=TRUE)
 			chr_name = paste0('chr', chr_num)
@@ -225,7 +225,7 @@
 
 	        cat('>>>> Begin process contact matrix and compute correlation score at:', as.character(Sys.time()), '\n', file=log_file, append=FALSE)
 	        cat('>>>> Begin process contact matrix and compute correlation score at:', as.character(Sys.time()), '\n')
-	        processed_data = contact_mat_processing_v2(contact_tab_straw, contact_file_straw=contact_file_straw, contact_file_hic=contact_file_hic, chr=chr_num, bin_size_input=bin_size_input, bin_size2look=bin_size2look, black_list_bins=black_list_bins)
+	        processed_data = contact_mat_processing_v2(contact_tab_dump, contact_file_dump=contact_file_dump, contact_file_hic=contact_file_hic, chr=chr_num, bin_size_input=bin_size_input, bin_size2look=bin_size2look, black_list_bins=black_list_bins)
 	     
 
 	        mat_dense = processed_data$mat_dense

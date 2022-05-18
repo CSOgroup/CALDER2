@@ -19,14 +19,14 @@
 		return(mat_compressed)
 	}
 
-	contact_mat_processing_v2 = function(contact_tab_straw=NULL, contact_file_straw=NULL, contact_file_hic=NULL, chr_num, bin_size_input, bin_size2look, black_list_bins=NULL)
+	contact_mat_processing_v2 = function(contact_tab_dump=NULL, contact_file_dump=NULL, contact_file_hic=NULL, chr_num, bin_size_input, bin_size2look, black_list_bins=NULL)
 	{	
 		compress_size = ifelse(bin_size2look < 40E3, 1, 1)
 		zero_ratio = 0.01
 
 
-		if(!is.null(contact_tab_straw)) contact_mat_raw = contact_tab_straw ## if contact matrix in data.frame or data.table of strawr format is provided
-		if(!is.null(contact_file_straw)) contact_mat_raw = data.table::fread(contact_file_straw) ## if contact matrix in strawr format is provided
+		if(!is.null(contact_tab_dump)) contact_mat_raw = contact_tab_dump ## if contact matrix in data.frame or data.table of strawr format is provided
+		if(!is.null(contact_file_dump)) contact_mat_raw = data.table::fread(contact_file_dump) ## if contact matrix in strawr format is provided
 
 		if(!is.null(contact_file_hic)) ## if contact matrix in hic format is provided
 		{
@@ -39,9 +39,9 @@
 
 			## try different normalization to get available dataset
 
-			contact_mat_raw = try(strawr::straw("KR", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
-			if(class(contact_mat_raw)=='try-error' | (class(contact_mat_raw)!='try-error' & nrow(na.omit(contact_mat_raw)) < 100)) contact_mat_raw = try(strawr::straw("VC_SQRT", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
-			if(class(contact_mat_raw)=='try-error' | (class(contact_mat_raw)!='try-error' & nrow(na.omit(contact_mat_raw)) < 100)) contact_mat_raw = try(strawr::straw("VC", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
+			contact_mat_raw = try(strawr::dump("KR", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
+			if(class(contact_mat_raw)=='try-error' | (class(contact_mat_raw)!='try-error' & nrow(na.omit(contact_mat_raw)) < 100)) contact_mat_raw = try(strawr::dump("VC_SQRT", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
+			if(class(contact_mat_raw)=='try-error' | (class(contact_mat_raw)!='try-error' & nrow(na.omit(contact_mat_raw)) < 100)) contact_mat_raw = try(strawr::dump("VC", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
 			if(class(contact_mat_raw)=='try-error' | (class(contact_mat_raw)!='try-error' & nrow(na.omit(contact_mat_raw)) < 100)) stop(sprintf('Your provided hic file does not contain information given the bin_size=%s and any of the normalization method KR/VC/VC_SQRT', bin_size_input))	
 			contact_mat_raw = data.table::as.data.table(contact_mat_raw)
 		}
