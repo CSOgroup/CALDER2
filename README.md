@@ -113,8 +113,8 @@ CALDER_sub_domains(intermediate_data_file,
 
 | Parameters              | Description                 
 | --------------------- | ----------------------- |
-| **cis**                | Find compartments on a cis interaction matrix
-| **trans**                | Find compartments on a trans interaction matrix
+| **contact_tab_straw**                | 
+| **ref_genome**                | One of 'hg19', 'hg38', 'mm9', '10', or NULL. 
 | **select**                | Selection of best PC for downstream analysis [Must be after cis or trans step]
 | **analyze**                | Perform differential analysis on selected PC's [Must be after select step]
 | **subcomp**                | Optional: Assigning sub-compartments based on PC magnitude values using HMM segmentation 
