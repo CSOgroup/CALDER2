@@ -111,7 +111,6 @@ CALDER_sub_domains(intermediate_data_file,
 * `save_intermediate_data`: logical. If TRUE, an intermediate_data will be saved. This file can be used for computing nested sub-domains later on
 * `genome`: string. Specifies the genome assembly (Default="hg19").
 
-| Parameters              | Description                 
 | --------------------- | ----------------------- |
 | **contact_tab_straw**                | 
 | **ref_genome**                | One of 'hg19', 'hg38', 'mm9', 'mm10', or 'others' by default. 
