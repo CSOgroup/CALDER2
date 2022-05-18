@@ -122,6 +122,8 @@ CALDER_sub_domains(intermediate_data_file,
 | **save_dir**             | the directory to save outputs
 | **save_intermediate_data**  | logical. If TRUE, an intermediate_data will be saved. This file can be used for computing nested sub-domains later on
 | **n_cores**     |  integer. Number of cores to be registered for running CALDER in parallel
+| **single_binsize_only**     |  logical. If TRUE, CALDER will compute compartments only using the bin_size specified by the user and not do bin size optimization
+| **sub_domains**     |  logical, whether to compute nested sub-domains
 
 
 ### Output:
