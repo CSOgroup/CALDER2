@@ -18,6 +18,7 @@ CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from w
 We added an opitimized `bin_size` (equivalent to `resoltution` in the literature) selection strategy for the purpose of calling reliable compartments at high resolution. This is based on the observation from our large scale compartment analysis that, although compartments can change between different conditions, their overall consistency is high (correlation > 0.4). Due to reasons such as low data quality or large scale structrual variation, compartments can be unrealiablly called at one `bin_size` but can be captured at another `bin_size`. We define the consistency as `cor(comp_rank, ref_comp_rank)`, and choose the smallest `bin_size` such that no bigger `bin_size` can increase the consistency more than 0.05. For example, if consistency for `bin_size=10000` is 0.2 while for `bin_size=50000` is 0.6, we are more confident the latter is more reliable; if consistency for `bin_size=10000` is 0.5 while for `bin_size=50000` is 0.52, we would choose the former as it has higher resolution.
 Thus we will try mutiple `bin_sizes` and choose the compartments called at the smallest `bin_size` value thus no bigger `bin_size` has the 
 <br>
+<br>
 High quality compartment calls were generated for `hg19` (hic data from GSE63525), `hg38` (hic data from https://data.4dnucleome.org/files-processed/4DNFI1UEG1HD/), `mm9` (hic data from GSM3959427), `mm10` (hic data from http://hicfiles.s3.amazonaws.com/external/bonev/CN_mapq30.hic)
 
 ```
