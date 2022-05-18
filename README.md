@@ -123,15 +123,7 @@ CALDER_sub_domains(intermediate_data_file,
 
 ### Paramters:
 
-* `contact_mat_file`: path to the contact table of a chromosome
-* `chr`: chromosome number. Either numeric or character, will be pasted to the output name
-* `bin_size`: numeric, the size of a bin in consistent with the contact table
-* `out_dir`: the output directory
-* `sub_domains`: logical, whether to compute nested sub-domains
-* `save_intermediate_data`: logical. If TRUE, an intermediate_data will be saved. This file can be used for computing nested sub-domains later on
-* `genome`: string. Specifies the genome assembly (Default="hg19").
-
-| Parameters              | Description |  
+| Name              | Description |  
 | --------------------- | ----------------------- |
 | **chrs**                | A vector of chromosome names to be analyzed, with or without 'chr'
 | **contact_file_dump**                |A list of contact files in dump format, named by `chrs`. Each contact file stores the contact information of the corresponding `chr`. Only one of `contact_file_dump`, `contact_tab_dump`, `contact_file_hic` should be provided
