@@ -112,10 +112,11 @@ CALDER_sub_domains(intermediate_data_file,
 * `genome`: string. Specifies the genome assembly (Default="hg19").
 
 | Parameters              | Description                 
+| --------------------- | ----------------------- |
 | **contact_tab_straw**                | 
 | **ref_genome**                | One of 'hg19', 'hg38', 'mm9', 'mm10', or 'others' by default. 
 | **annotation_track**                | A table in data.frame or data.table format
-| **contact_file_hic**                | Path to the hic file
+| **contact_file_hic**                | Path to the hic
 | **subcomp**                | Optional: Assigning sub-compartments based on PC magnitude values using HMM segmentation 
 | **fithic**         | Run [Fit-Hi-C](https://github.com/ay-lab/fithic) to identify loops before running dloop (Optional but recommended)
 | **dloop**             | Find differential loops anchored in at least one of the differential compartments across the samples (Optional but recommended)
