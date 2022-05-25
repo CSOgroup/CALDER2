@@ -41,7 +41,7 @@ Although CALDER was mainly tested on human and mouse dataset, it can be applied 
 
 ```
 library(rtracklayer)
-feature_track  = import('ENCFF934YOE.bigWig') ## from ENCODE
+feature_track  = import('ENCFF934YOE.bigWig') ## from ENCODE https://www.encodeproject.org/files/ENCFF934YOE/@@download/ENCFF934YOE.bigWig
 feature_track = data.table::as.data.table(feature_track)[, c(1:3, 6)]
 ```
 	> feature_track
