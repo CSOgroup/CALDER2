@@ -216,7 +216,7 @@ CALDER(contact_file_dump=contact_file_dump,
 | **genome**                | One of 'hg19', 'hg38', 'mm9', 'mm10', 'others' (default). These compartments will be used as reference compartments for optimized bin_size selection. If `genome = others`, a `feature_track` should be provided (see below) and no optimized bin_size selection will be performed 
 | **feature_track**                | A genomic feature track in `data.frame` or `data.table` format. This track will be used for determing the A/B compartment direction when `genome=others` and should presumably have higher values in A than in B compartment. Some suggested tracks can be gene density, H3K27ac, H3K4me1, H3K4me2, H3K4me3, H3K36me3 (or negative transform of H3K9me3 signals)
 | **bin_size**         | The bin_size (resolution) to run CALDER. `bin_size` should be consistent with the data resolution in `contact_file_dump` or `contact_tab_dump` if these files are provided as input, otherwise `bin_size` should exist in `contact_file_hic`. Recommended `bin_size` is between **10000 to 100000**
-| **save_dir**             | the directory to save outputs
+| **save_dir**             | the directory to be created for saving outputs
 | **save_intermediate_data**  | logical. If TRUE, an intermediate_data will be saved. This file can be used for computing nested sub-domains later on
 | **n_cores**     |  integer. Number of cores to be registered for running CALDER in parallel
 | **single_binsize_only**     |  logical. If TRUE, CALDER will compute compartments only using the bin_size specified by the user and not do bin size optimization
