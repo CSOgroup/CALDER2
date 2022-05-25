@@ -289,8 +289,7 @@ save_dir/
 | --------------------- | ----------------------- |
 | **all_sub_compartments.bed**                | a .bed file containing the optimal compartments for all `chrs`, that can be visualized in IGV. Different colors were used to distinguish compartments (at the resolution of 8 sub-compartments)
 | **all_sub_compartments.tsv**                | optimal compartments stored in tabular text format. Each row represents one 10kb region
-| **all_sub_compartments.tsv**                | optimal compartment information stored in tabular text format. Each row represents one 10kb region
-| **cor_with_ref.ALL.txt**                | correlation of compartment rank with the reference compartment rank for each of `bin_sizes`, and the optimimal `bin_size` that is finally selected
+| **cor_with_ref.ALL.txt**                | correlation of compartment rank with the reference compartment rank for each of extended `bin_sizes`, and the optimimal `bin_size` that is finally selected
 | **cor_with_ref.pdf**                | correlation of compartment rank with the reference compartment rank using the optimimal `bin_size`
 
 
