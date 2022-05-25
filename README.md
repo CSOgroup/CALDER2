@@ -195,15 +195,13 @@ names(contact_file_dump) = chrs
 CALDER(contact_file_dump=contact_file_dump, 
 			chrs=chrs, 
 			bin_size=10E3,
-			genome=NULL,
+			genome=others,
 			save_dir=save_dir,
 			feature_track=feature_track,
 			save_intermediate_data=FALSE,
 			n_cores=2,
 			sub_domains=FALSE)
 ```
-
-
 
 
 
