@@ -186,6 +186,7 @@ library(rtracklayer)
 feature_track_raw  = import('ENCFF934YOE.bigWig') ## from ENCODE https://www.encodeproject.org/files/ENCFF934YOE/@@download/ENCFF934YOE.bigWig
 feature_track = data.table::as.data.table(feature_track_raw)[, c(1:3, 6)]
 
+## Run CALDER
 chrs = c(21:22)
 contact_file_dump = as.list(system.file("extdata", sprintf("mat_chr%s_10kb_ob.txt.gz", chrs),
 			package='CALDER'))
