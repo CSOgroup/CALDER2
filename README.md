@@ -21,7 +21,7 @@ Due to reasons such as low data quality or large scale structrual variation, com
 **The strategy**: given a `bin_size` specified by user, we call compartments with extended `bin_sizes` and choose the smallest `bin_size` such that no bigger `bin_size` can increase the compartment correclation with a reference compartment more than 0.05. For example, if correclation for `bin_size=10000` is 0.2 while for `bin_size=50000` is 0.6, we are more confident the latter is more reliable; if correclation for `bin_size=10000` is 0.5 while for `bin_size=50000` is 0.52, we would choose the former as it has higher resolution.
 <br>
 <br>
-`bin_size` is extended in the following way thus to aggregate directly from the input contact matrix into larger `bin_sizes`, without the need to provide additional contact matrices from user side
+`bin_size` is extended in the following way thus to aggregate directly from the input contact matrix into larger *bin_sizes*, without the need to provide additional contact matrices from user side
 ```
 if(bin_size==5E3) bin_sizes = c(5E3, 10E3, 50E3, 100E3)
 if(bin_size==10E3) bin_sizes = c(10E3, 50E3, 100E3)
@@ -34,7 +34,7 @@ Note that this strategy is currently only available for `hg19`, `hg38`, `mm9` an
 
 ### Introduction of CALDER analysis for other genomes
 
-Although CALDER was mainly tested on human and mouse dataset, it can be applied on dataset from other genomes. One additional information is required in such case: a `feature_track` that is presumably positively correlated with compartment score (thus higher values in A than in B compartment). This information will be used for correctly determing the `A/B` direction. Some suggested tracks are gene density, H3K27ac, H3K4me1, H3K4me2, H3K4me3, H3K36me3 (or negative transform of H3K9me3) signals. Note that this information will not alter the hierarchical compartment/TAD structure, and can come from any external study with matched genome.
+Although CALDER was mainly tested on human and mouse dataset, it can be applied to dataset from other genomes. One additional information is required in such case: a `feature_track` presumably positively correlated with compartment score (thus higher values in A than in B compartment). This information will be used for correctly determing the `A/B` direction. Some suggested tracks are gene density, H3K27ac, H3K4me1, H3K4me2, H3K4me3, H3K36me3 (or negative transform of H3K9me3) signals. Note that this information will not alter the hierarchical compartment/TAD structure, and can come from any external study with matched genome.
 <br>
 <br>
 `feature_track` should be a data.frame or data.table having 4 columns (chr, start, end, score), and can be generated directly from conventional format such as bed or wig, such as the following example:
