@@ -27,7 +27,7 @@ Due to reasons such as low data quality or large scale structrual variation, com
 **The strategy**: given a `bin_size` specified by user, we call compartments with extended `bin_sizes` and choose the smallest `bin_size` such that no bigger `bin_size` can increase the compartment correclation with a reference compartment more than 0.05. For example, if correclation for `bin_size=10000` is 0.2 while for `bin_size=50000` is 0.6, we are more confident that the latter is more reliable; if correclation for `bin_size=10000` is 0.5 while for `bin_size=50000` is 0.52, we would choose the former as it has higher resolution.
 <br>
 <br>
-`bin_size` is extended in the following way thus contact matrices at larger `bin_sizes` can be aggregated from the input matrices, without the need to provide additional contact matrices from user side
+`bin_size` is extended in the following way thus contact matrices at larger `bin_sizes` can be aggregated from the input contact matrices
 ```
 if(bin_size==5E3) bin_sizes = c(5E3, 10E3, 50E3, 100E3)
 if(bin_size==10E3) bin_sizes = c(10E3, 50E3, 100E3)
