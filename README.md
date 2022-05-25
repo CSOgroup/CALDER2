@@ -265,16 +265,6 @@ results/
 ### Runnig time:
 For the computational requirement, running CALDER on the GM12878 Hi-C dataset at bin size of 40kb took **36 minutes** to derive the chromatin domains and their hierarchy for all chromosomes (i.e., CALDER Step1 and Step2); **13 minutes** to derive the nested sub-domains (i.e., CALDER Step3). At the bin size of 10kb, it took **1 h 44 minutes and 55 minutes** correspondingly (server information: 40 cores, 64GB Ram, Intel(R) Xeon(R) Silver 4210 CPU @ 2.20GHz). The evaluation was done using a single core although CALDER can be run in a parallel manner.
 
-### Demo run:
-
-```
-library(CALDER)
-
-contact_mat_file = system.file("extdata", "mat_chr22_10kb_ob.txt.gz", package = 'CALDER')
-
-CALDER_main(contact_mat_file, chr=22, bin_size=10E3, out_dir='./GM12878', sub_domains=TRUE, save_intermediate_data=FALSE)
-```
-
 The saved .bed files can be view directly through IGV:
 
 ![Alt text](./img/IGV_results.png "IGV")
