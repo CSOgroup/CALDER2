@@ -34,7 +34,7 @@ Note that this strategy is currently only available for `hg19`, `hg38`, `mm9` an
 
 ### Introduction of CALDER analysis for other genomes
 
-Although CALDER was mainly tested on human and mouse dataset, it can be applied to dataset from other genomes. One additional information is required in such case: a `feature_track` presumably positively correlated with compartment score (thus higher values in A than in B compartment). This information will be used for correctly determing the `A/B` direction. Some suggested tracks are gene density, H3K27ac, H3K4me1, H3K4me2, H3K4me3, H3K36me3 (or negative transform of H3K9me3) signals. Note that this information will not alter the hierarchical compartment/TAD structure, and can come from any external study with matched genome.
+Although CALDER was mainly tested on human and mouse dataset, it can be applied to dataset from other genomes. One additional information is required in such case: a `feature_track` presumably positively correlated with compartment score (thus higher values in A than in B compartment). This information will be used for correctly determing the `A/B` direction. Some suggested tracks are gene density, H3K27ac, H3K4me1, H3K4me2, H3K4me3, H3K36me3 (or negative transform of H3K9me3) signals. Note that this information will not alter the hierarchical compartment/TAD structure, and can come from any external study with matched genome. An example of `feature_track` is given in the **Usage** section
 
 # Installation
 
