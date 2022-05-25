@@ -282,6 +282,10 @@ save_dir/
 
 ### File description:
 
+* The sub_compartments folder stores the final compartment information
+* The sub_domains folder stores the final nested boundaries information
+* The intermediate_data folder stores information at each of the extended `bin_sizes`
+
 #### chrxx_domain_hierachy.tsv
 * information of compartment domain and their hierarchical organization. The hierarchical structure is fully represented by `compartment_label`, for example, `B.2.2.2` and `B.2.2.1` are two sub-branches of `B.2.2`. The `pos_end` column specifies all compartment domain borders, except when it is marked as `gap`, which indicates it is the border of a gap chromsome region that has too few contacts and was excluded from the analysis (e.g., due to low mappability, deletion, technique flaw) 
 
