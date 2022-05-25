@@ -35,10 +35,13 @@ Note that this strategy is currently only available for `hg19`, `hg38`, `mm9` an
 ### Introduction of CALDER analysis for other genomes
 
 Although CALDER was mainly tested on human and mouse dataset, it can be applied on dataset from other genomes. One additional information is required in such case: a `feature_track` that is presumably positively correlated with compartment score (thus higher values in A than in B compartment). This information will be used for correctly determing the `A/B` direction. Some suggested tracks are gene density, H3K27ac, H3K4me1, H3K4me2, H3K4me3, H3K36me3 (or negative transform of H3K9me3) signals. Note that this information will not alter the hierarchical compartment/TAD structure, and can come from any external study with matched genome.
+<br>
+<br>
+`feature_track` should be 4 column data.frame or data.table format, and can be generated directly from conventional format such as bed or wig, such as the following example:
 
 ```
 library(rtracklayer)
-feature_track  = import('/mnt/etemp/Yuanlong/4.Tmp/ENCFF934YOE.bigWig')
+feature_track  = import('ENCFF934YOE.bigWig') ## from ENCODE
 feature_track = data.table::as.data.table(feature_track)[, c(1:3, 6)]
 ```
 	chr	start	end	score
@@ -52,7 +55,6 @@ feature_track = data.table::as.data.table(feature_track)[, c(1:3, 6)]
 	chrY	59032414	59032415	0.96625
 	chrY	59032416	59032456	0.92023
 	chrY	59032457	59032578	0.78875
-	...
 
 # Installation
 
