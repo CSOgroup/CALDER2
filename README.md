@@ -200,21 +200,25 @@ CALDER(contact_file_dump=contact_file_dump,
 			sub_domains=FALSE)
 ```
 
-
 ### Example four:
 ```
 chrs = c(21:22)
-hic_file = 'HMEC_combined_30.hic' ## can be downloaded from https://ftp.ncbi.nlm.nih.gov/geo/series/GSE63nnn/GSE63525/suppl/GSE63525_HMEC_combined_30.hic
+contact_file_dump = as.list(system.file("extdata", sprintf("mat_chr%s_10kb_ob.txt.gz", chrs),
+			package='CALDER'))
+names(contact_file_dump) = chrs
 
-CALDER(contact_file_hic=hic_file, 
+# This will not compute sub-domains, but save the intermediate_data that can be used to compute sub-domains latter on
+CALDER(contact_file_dump=contact_file_dump, 
 			chrs=chrs, 
 			bin_size=10E3,
-			genome='others',
+			genome=NULL,
 			save_dir=save_dir,
+			feature_track=feature_track
 			save_intermediate_data=FALSE,
 			n_cores=2,
 			sub_domains=FALSE)
 ```
+
 
 
 
