@@ -145,7 +145,7 @@ CALDER(contact_file_dump=contact_file_dump,
 			sub_domains=TRUE)
 ```
 
-### Example (2): use an R list of contact matrices in dump format as input
+### Example (2): use contact matrices stored in an R list 
 ```
 chrs = c(21:22)
 contact_file_dump = as.list(system.file("extdata", sprintf("mat_chr%s_10kb_ob.txt.gz", chrs),
