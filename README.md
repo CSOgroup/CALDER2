@@ -282,13 +282,13 @@ save_dir/
 
 ### File description:
 
-* The `sub_domains` folder stores the final nested boundaries information
+* The `sub_domains` folder stores the final nested boundaries
 * The `sub_compartments` folder stores the optimal compartment information, including files:
 
 | Name              | Description |  
 | --------------------- | ----------------------- |
-| **all_sub_compartments.bed**                | a .bed file containing the optimal sub-compartment information for all `chrs`, that can be visualized in IGV. Different colors were used to distinguish compartments (at the resolution of 8 sub-compartments)
-| **all_sub_compartments.tsv**                | optimal compartment information stored in tabular text format. Each row represents one 10kb region
+| **all_sub_compartments.bed**                | a .bed file containing the optimal compartments for all `chrs`, that can be visualized in IGV. Different colors were used to distinguish compartments (at the resolution of 8 sub-compartments)
+| **all_sub_compartments.tsv**                | optimal compartments stored in tabular text format. Each row represents one 10kb region
 | **all_sub_compartments.tsv**                | optimal compartment information stored in tabular text format. Each row represents one 10kb region
 | **cor_with_ref.ALL.txt**                | correlation of compartment rank with the reference compartment rank for each of `bin_sizes`, and the optimimal `bin_size` that is finally selected
 | **cor_with_ref.pdf**                | correlation of compartment rank with the reference compartment rank using the optimimal `bin_size`
@@ -301,7 +301,7 @@ save_dir/
 | Name              | Description |  
 | --------------------- | ----------------------- |
 | **chrxx_domain_hierachy.tsv**                | information of compartment domain and their hierarchical organization. The hierarchical structure is fully represented by `compartment_label`, for example, `B.2.2.2` and `B.2.2.1` are two sub-branches of `B.2.2`. The `pos_end` column specifies all compartment domain borders, except when it is marked as `gap`, which indicates it is the border of a gap chromsome region that has too few contacts and was excluded from the analysis (e.g., due to low mappability, deletion, technique flaw) 
-| **chrxx_sub_compartments.bed**                | a .bed file containing the sub-compartment information, that can be visualized in IGV. Different colors were used to distinguish compartments (at the resolution of 8 sub-compartments)
+| **chrxx_sub_compartments.bed**                | a .bed file containing the compartment information, that can be visualized in IGV. Different colors were used to distinguish compartments (at the resolution of 8 sub-compartments)
 | **chrxx_domain_boundaries.bed**                | a .bed file containing the chromatin domains boundaries, that can be visualized in IGV
 | **chrxx_nested_boundaries.bed**                | a .bed file containing the nested sub-domain boundaries, that can be visualized in IGV
 | **chrxx_intermediate_data.Rds**                | an Rds file storing the intermediate_data that can be used to compute nested sub-domains (if CALDER is run in two seperated steps)
