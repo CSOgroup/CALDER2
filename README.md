@@ -5,7 +5,7 @@ CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from w
 
 ![Alt text](./img/CALDER_methods.png "CALDER methods")
 
-Calder links chromatin 3D organization to genomic function
+Calder links chromatin 3D organization to genomic function:
 ![Alt text](./img/CALDER_features.png "CALDER features")
 
 
