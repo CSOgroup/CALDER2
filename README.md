@@ -34,7 +34,7 @@ Note that this strategy is currently only available for `hg19`, `hg38`, `mm9` an
 
 ### Introduction of Calder analysis for other genomes
 
-Although CALDER was mainly tested on human and mouse dataset, it can be applied on dataset from other genomes. One additional information is required in such case for determining which branch of the hierachcal tree to be assigned as `A` compartment: a `feature_track` that is presumably positively correlated with compartment score (or higher values in A than in B compartment). Some suggested tracks are gene density, H3K27ac, H3K4me1, H3K4me2, H3K4me3, H3K36me3 (or negative transform of H3K9me3) signals. Note 
+Although CALDER was mainly tested on human and mouse dataset, it can be applied on dataset from other genomes. One additional information is required in such case: a `feature_track` that is presumably positively correlated with compartment score (or higher values in A than in B compartment). This information will be used for determining which branch of the hierachcal tree to be assigned as `A` compartment. Some suggested tracks are gene density, H3K27ac, H3K4me1, H3K4me2, H3K4me3, H3K36me3 (or negative transform of H3K9me3) signals. Note that this information will not alter the hierarchical compartment/TAD structure, and 
 
 # Installation
 
