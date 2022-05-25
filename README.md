@@ -13,7 +13,7 @@ CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from w
 * Aggregated all chromosome output into a single file for easier visualization in IGV
 * Added output in tabular .txt format at bin level for easier downstream analysis
 
-## Introduction of opitimized `bin_size` selection
+### Introduction of opitimized `bin_size` selection
 
 Due to reasons such as low data quality or large scale structrual variation, compartments can be unreliablly called at one `bin_size` (equivalent to `resoltution` in the literature) but correctly called at another `bin_size`. We added an opitimized `bin_size` selection strategy to call reliable compartments. This strategey is based on the observation from our large scale compartment analysis (https://www.nature.com/articles/s41467-021-22666-3) that, although compartments can change between different conditions, their overall correlation `cor(compartment_rank_1, compartment_rank_2)` is high (> 0.4).
 <br>
@@ -31,6 +31,10 @@ if(bin_size==40E3) bin_sizes = c(40E3, 80E3)
 if(bin_size==50E3) bin_sizes = c(50E3, 100E3)
 ```
 Note that this strategy is currently only available for `hg19`, `hg38`, `mm9` and `mm10` genome for which we generated high quality reference compartments using Hi-C data from: GSE63525 for `hg19`, https://data.4dnucleome.org/files-processed/4DNFI1UEG1HD/ for `hg38`, GSM3959427 for `mm9`, http://hicfiles.s3.amazonaws.com/external/bonev/CN_mapq30.hic for `mm10`.
+
+### Introduction of Calder analysis for other genomes
+
+Due to reasons such as low data quality or large scale structrual variation, compartments can be unreliablly called at one `bin_size` (equivalent to `resoltution` in the literature) but correctly called at another `bin_size`. We added an opitimized `bin_size` selection strategy to call reliable compartments. This strategey is based on the observation from our large scale compartment analysis (https://www.nature.com/articles/s41467-021-22666-3) that, although compartments can change between different conditions, their overall correlation `cor(compartment_rank_1, compartment_rank_2)` is high (> 0.4).
 
 
 # Installation
