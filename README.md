@@ -44,6 +44,7 @@ library(rtracklayer)
 feature_track  = import('ENCFF934YOE.bigWig') ## from ENCODE
 feature_track = data.table::as.data.table(feature_track)[, c(1:3, 6)]
 ```
+	> feature_track
 	chr	start	end	score
 	chr1	534179	534353	2.80512
 	chr1	534354	572399	0
