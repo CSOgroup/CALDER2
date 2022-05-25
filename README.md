@@ -36,15 +36,20 @@ Note that this strategy is currently only available for `hg19`, `hg38`, `mm9` an
 
 Although CALDER was mainly tested on human and mouse dataset, it can be applied on dataset from other genomes. One additional information is required in such case: a `feature_track` that is presumably positively correlated with compartment score (thus higher values in A than in B compartment). This information will be used for correctly determing the `A/B` direction. Some suggested tracks are gene density, H3K27ac, H3K4me1, H3K4me2, H3K4me3, H3K36me3 (or negative transform of H3K9me3) signals. Note that this information will not alter the hierarchical compartment/TAD structure, and can come from any external study with matched genome.
 
-	16050000	16050000	10106.306
-	16050000	16060000	2259.247
-	16060000	16060000	7748.551
-	16050000	16070000	1251.3663
-	16060000	16070000	4456.1245
-	16070000	16070000	4211.7393
-	16050000	16080000	522.0705
-	16060000	16080000	983.1761
-	16070000	16080000	1996.749
+rtracklayer
+
+chr	start	end	score
+chr1	1	534178	0
+chr1	534179	534353	2.80512
+chr1	534354	572399	0
+chr1	572400	572574	2.80512
+chr1	572575	628400	0
+…	…	…	…
+chrY	59031457	59032403	0
+chrY	59032404	59032413	0.92023
+chrY	59032414	59032415	0.96625
+chrY	59032416	59032456	0.92023
+chrY	59032457	59032578	0.78875
 	...
 
 # Installation
