@@ -114,7 +114,7 @@ feature_track = data.table::as.data.table(feature_track)[, c(1:3, 6)]
 	chrY	59032416	59032456	0.92023
 	chrY	59032457	59032578	0.78875
 
-### Example one: use contact matrix file in dump format as input
+### Example usage 1: use contact matrix file in dump format as input
 ```
 chrs = c(21:22)
 
@@ -123,7 +123,7 @@ contact_file_dump = as.list(system.file("extdata", sprintf("mat_chr%s_10kb_ob.tx
 			package='CALDER'))
 names(contact_file_dump) = chrs
 
-# Run CALDER to compute compartments
+# Run CALDER to compute compartments but not nested sub-domains
 CALDER(contact_file_dump=contact_file_dump, 
 			chrs=chrs, 
 			bin_size=10E3,
@@ -132,6 +132,16 @@ CALDER(contact_file_dump=contact_file_dump,
 			save_intermediate_data=FALSE,
 			n_cores=2,
 			sub_domains=FALSE)
+
+# Run CALDER to compute compartments and nested sub-domains / will take more time
+CALDER(contact_file_dump=contact_file_dump, 
+			chrs=chrs, 
+			bin_size=10E3,
+			genome='hg19',
+			save_dir=save_dir,
+			save_intermediate_data=FALSE,
+			n_cores=2,
+			sub_domains=TRUE)
 ```
 
 ### Example two: use an R list of contact matrices in dump format as input
