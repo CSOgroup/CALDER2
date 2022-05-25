@@ -123,7 +123,7 @@ contact_file_dump = as.list(system.file("extdata", sprintf("mat_chr%s_10kb_ob.tx
 			package='CALDER'))
 names(contact_file_dump) = chrs
 
-# Run CALDER to compute compartments but not nested sub-domains
+## Run CALDER to compute compartments but not nested sub-domains
 CALDER(contact_file_dump=contact_file_dump, 
 			chrs=chrs, 
 			bin_size=10E3,
@@ -133,7 +133,7 @@ CALDER(contact_file_dump=contact_file_dump,
 			n_cores=2,
 			sub_domains=FALSE)
 
-# Run CALDER to compute compartments and nested sub-domains / will take more time
+## Run CALDER to compute compartments and nested sub-domains / will take more time
 CALDER(contact_file_dump=contact_file_dump, 
 			chrs=chrs, 
 			bin_size=10E3,
