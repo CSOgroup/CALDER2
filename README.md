@@ -234,57 +234,57 @@ CALDER(contact_file_dump=contact_file_dump,
 The output of the workflow is stored in the folder specified by `save_dir` and will look like this:
 ```
 save_dir/
-|-- intermediate_data
-|   |-- sub_compartments
-|   |   |-- 100kb
-|   |   |   |-- chr21_domain_boundaries.bed
-|   |   |   |-- chr21_domain_hierachy.tsv
-|   |   |   |-- chr21_log.txt
-|   |   |   |-- chr21_sub_compartments.bed
-|   |   |   |-- chr22_domain_boundaries.bed
-|   |   |   |-- chr22_domain_hierachy.tsv
-|   |   |   |-- chr22_log.txt
-|   |   |   `-- chr22_sub_compartments.bed
-|   |   |-- 10kb
-|   |   |   |-- chr21_domain_boundaries.bed
-|   |   |   |-- chr21_domain_hierachy.tsv
-|   |   |   |-- chr21_intermediate_data.Rds
-|   |   |   |-- chr21_log.txt
-|   |   |   |-- chr21_sub_compartments.bed
-|   |   |   |-- chr22_domain_boundaries.bed
-|   |   |   |-- chr22_domain_hierachy.tsv
-|   |   |   |-- chr22_intermediate_data.Rds
-|   |   |   |-- chr22_log.txt
-|   |   |   `-- chr22_sub_compartments.bed
-|   |   `-- 50kb
-|   |       |-- chr21_domain_boundaries.bed
-|   |       |-- chr21_domain_hierachy.tsv
-|   |       |-- chr21_log.txt
-|   |       |-- chr21_sub_compartments.bed
-|   |       |-- chr22_domain_boundaries.bed
-|   |       |-- chr22_domain_hierachy.tsv
-|   |       |-- chr22_log.txt
-|   |       `-- chr22_sub_compartments.bed
-|   `-- sub_domains
-|       |-- chr21_nested_boundaries.bed
-|       |-- chr21_sub_domains_log.txt
-|       |-- chr22_nested_boundaries.bed
-|       `-- chr22_sub_domains_log.txt
-|-- sub_compartments ## final sub-compartments
-|   |-- all_sub_compartments.bed
-|   |-- all_sub_compartments.tsv
-|   |-- cor_with_ref.ALL.txt
+|-- sub_domains
+|   `-- all_nested_boundaries.bed
+|-- sub_compartments
+|   |-- cor_with_ref.txt
 |   |-- cor_with_ref.pdf
-|   `-- cor_with_ref.txt
-`-- sub_domains ## all nested boundaries
-    `-- all_nested_boundaries.bed
+|   |-- cor_with_ref.ALL.txt
+|   |-- all_sub_compartments.tsv
+|   `-- all_sub_compartments.bed
+`-- intermediate_data
+    |-- sub_domains
+    |   |-- chr22_sub_domains_log.txt
+    |   |-- chr22_nested_boundaries.bed
+    |   |-- chr21_sub_domains_log.txt
+    |   `-- chr21_nested_boundaries.bed
+    `-- sub_compartments
+        |-- 50kb
+        |   |-- chr22_sub_compartments.bed
+        |   |-- chr22_log.txt
+        |   |-- chr22_domain_hierachy.tsv
+        |   |-- chr22_domain_boundaries.bed
+        |   |-- chr21_sub_compartments.bed
+        |   |-- chr21_log.txt
+        |   |-- chr21_domain_hierachy.tsv
+        |   `-- chr21_domain_boundaries.bed
+        |-- 10kb
+        |   |-- chr22_sub_compartments.bed
+        |   |-- chr22_log.txt
+        |   |-- chr22_intermediate_data.Rds
+        |   |-- chr22_domain_hierachy.tsv
+        |   |-- chr22_domain_boundaries.bed
+        |   |-- chr21_sub_compartments.bed
+        |   |-- chr21_log.txt
+        |   |-- chr21_intermediate_data.Rds
+        |   |-- chr21_domain_hierachy.tsv
+        |   `-- chr21_domain_boundaries.bed
+        `-- 100kb
+            |-- chr22_sub_compartments.bed
+            |-- chr22_log.txt
+            |-- chr22_domain_hierachy.tsv
+            |-- chr22_domain_boundaries.bed
+            |-- chr21_sub_compartments.bed
+            |-- chr21_log.txt
+            |-- chr21_domain_hierachy.tsv
+            `-- chr21_domain_boundaries.bed
 ```
 
 ### File description:
 
-* The sub_compartments folder stores the final compartment information
-* The sub_domains folder stores the final nested boundaries information
-* The intermediate_data folder stores information at each of the extended `bin_sizes`
+* The `sub_domains` folder stores the final nested boundaries information
+* The `sub_compartments` folder stores the final compartment information
+* The `intermediate_data` folder stores intermediate information at each of the extended `bin_sizes`
 
 #### chrxx_domain_hierachy.tsv
 * information of compartment domain and their hierarchical organization. The hierarchical structure is fully represented by `compartment_label`, for example, `B.2.2.2` and `B.2.2.1` are two sub-branches of `B.2.2`. The `pos_end` column specifies all compartment domain borders, except when it is marked as `gap`, which indicates it is the border of a gap chromsome region that has too few contacts and was excluded from the analysis (e.g., due to low mappability, deletion, technique flaw) 
