@@ -13,7 +13,7 @@ CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from w
 * Aggregated all chromosome output into a single file for easier visualization in IGV
 * Added output in tabular .txt format at bin level for easier downstream analysis
 
-Below we introduce two of the main updates:
+Below we introduce two main updates:
 
 ### (1) Opitimized `bin_size` selection
 
