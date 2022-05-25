@@ -253,18 +253,42 @@ CALDER(contact_file_dump=contact_file_dump,
 ## Output Structure
 The output of the workflow is stored in the folder specified by `--save_dir` ("results" by default) and will look like this:
 ```
-results/
-└── HiC_sample_1
-    ├── 100000
-    │   └── KR
-    │       ├── chr1
-    │       │   ├── chr1_domain_boundaries.bed
-    │       │   ├── chr1_domain_hierachy.tsv
-    │       │   ├── chr1_log.txt
-    │       │   ├── chr1_nested_boundaries.bed
-    │       │   ├── chr1_sub_compartments.bed
-    │       │   └── chr1_sub_domains_log.txt
-
+CALDER_dev_output/
+|-- [   37]  intermediate_data
+|   `-- [   56]  sub_compartments
+|       |-- [ 4.0K]  100kb
+|       |   |-- [ 2.6K]  chr21_domain_boundaries.bed
+|       |   |-- [ 2.1K]  chr21_domain_hierachy.tsv
+|       |   |-- [  518]  chr21_log.txt
+|       |   |-- [ 3.4K]  chr21_sub_compartments.bed
+|       |   |-- [ 2.7K]  chr22_domain_boundaries.bed
+|       |   |-- [ 2.2K]  chr22_domain_hierachy.tsv
+|       |   |-- [  517]  chr22_log.txt
+|       |   `-- [ 3.5K]  chr22_sub_compartments.bed
+|       |-- [ 4.0K]  10kb
+|       |   |-- [  13K]  chr21_domain_boundaries.bed
+|       |   |-- [  11K]  chr21_domain_hierachy.tsv
+|       |   |-- [  494]  chr21_log.txt
+|       |   |-- [  18K]  chr21_sub_compartments.bed
+|       |   |-- [  15K]  chr22_domain_boundaries.bed
+|       |   |-- [  13K]  chr22_domain_hierachy.tsv
+|       |   |-- [  494]  chr22_log.txt
+|       |   `-- [  21K]  chr22_sub_compartments.bed
+|       `-- [ 4.0K]  50kb
+|           |-- [ 5.3K]  chr21_domain_boundaries.bed
+|           |-- [ 4.4K]  chr21_domain_hierachy.tsv
+|           |-- [  519]  chr21_log.txt
+|           |-- [ 7.0K]  chr21_sub_compartments.bed
+|           |-- [ 5.4K]  chr22_domain_boundaries.bed
+|           |-- [ 4.5K]  chr22_domain_hierachy.tsv
+|           |-- [  519]  chr22_log.txt
+|           `-- [ 7.3K]  chr22_sub_compartments.bed
+`-- [ 4.0K]  sub_compartments
+    |-- [  39K]  all_sub_compartments.bed
+    |-- [ 430K]  all_sub_compartments.tsv
+    |-- [   47]  cor_with_ref.ALL.txt
+    |-- [ 5.1K]  cor_with_ref.pdf
+    `-- [   24]  cor_with_ref.txt
 ```
 
 The saved .bed files can be view directly through IGV:
