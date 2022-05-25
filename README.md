@@ -114,7 +114,7 @@ feature_track = data.table::as.data.table(feature_track)[, c(1:3, 6)]
 	chrY	59032416	59032456	0.92023
 	chrY	59032457	59032578	0.78875
 
-### Example usage 1: use contact matrix file in dump format as input
+### Example usage (1): use contact matrix file in dump format as input
 ```
 chrs = c(21:22)
 
@@ -144,7 +144,7 @@ CALDER(contact_file_dump=contact_file_dump,
 			sub_domains=TRUE)
 ```
 
-### Example two: use an R list of contact matrices in dump format as input
+### Example (2): use an R list of contact matrices in dump format as input
 ```
 chrs = c(21:22)
 contact_file_dump = as.list(system.file("extdata", sprintf("mat_chr%s_10kb_ob.txt.gz", chrs),
@@ -163,7 +163,7 @@ CALDER(contact_tab_dump=contact_tab_dump,
 			sub_domains=FALSE)
 ```
 
-### Example three: use .hic file as input
+### Example (3): use .hic file as input
 ```
 chrs = c(21:22)
 hic_file = 'HMEC_combined_30.hic' ## can be downloaded from https://ftp.ncbi.nlm.nih.gov/geo/series/GSE63nnn/GSE63525/suppl/GSE63525_HMEC_combined_30.hic
@@ -178,7 +178,7 @@ CALDER(contact_file_hic=hic_file,
 			sub_domains=FALSE)
 ```
 
-### Example four: run CALDER on other genomes
+### Example (4): run CALDER on other genomes
 ```
 ## prepare feature_track
 library(rtracklayer)
