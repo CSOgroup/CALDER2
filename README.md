@@ -116,35 +116,6 @@ A demo dataset is included in the repository `CALDER/inst/extdata/mat_chr22_10kb
 
 CALDER contains three modules: (1) compute chromatin domains; (2) derive their hierarchical organization and obtain sub-compartments; (3) compute nested sub-domains within each compartment domain.
 
-### To run three modules in a single step:
-```
-CALDER_main(contact_mat_file, 
-			chr, 
-			bin_size, 
-			out_dir, 
-			sub_domains=TRUE, 
-			save_intermediate_data=FALSE,
-			genome='hg19')
-```
-
-### To run three modules in seperated steps:
-```
-# This will not compute sub-domains, but save the intermediate_data that can be used to compute sub-domains latter on
-CALDER_main(contact_mat_file, 
-			chr, 
-			bin_size, 
-			out_dir, 
-			sub_domains=FALSE, 
-			save_intermediate_data=TRUE,
-			genome='hg19') 
-
-# (optional depends on needs) Compute sub-domains using intermediate_data_file that was previous saved in the out_dir (named as chrxx_intermediate_data.Rds)
-CALDER_sub_domains(intermediate_data_file, 
-				   chr, 
-				   out_dir, 
-				   bin_size) 
-```
-
 ### Example one:
 ```
 chrs = c(21:22)
