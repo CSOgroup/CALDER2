@@ -160,7 +160,6 @@ CALDER(contact_tab_dump=contact_tab_dump,
 chrs = c(21:22)
 hic_file = 'HMEC_combined_30.hic' ## can be downloaded from https://ftp.ncbi.nlm.nih.gov/geo/series/GSE63nnn/GSE63525/suppl/GSE63525_HMEC_combined_30.hic
 
-# This will not compute sub-domains, but save the intermediate_data that can be used to compute sub-domains latter on
 CALDER(contact_file_hic=hic_file, 
 			chrs=chrs, 
 			bin_size=10E3,
@@ -183,8 +182,6 @@ contact_file_dump = as.list(system.file("extdata", sprintf("mat_chr%s_10kb_ob.tx
 			package='CALDER'))
 names(contact_file_dump) = chrs
 
-
-# This will not compute sub-domains, but save the intermediate_data that can be used to compute sub-domains latter on
 CALDER(contact_file_dump=contact_file_dump, 
 			chrs=chrs, 
 			bin_size=10E3,
