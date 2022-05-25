@@ -153,16 +153,14 @@ names(contact_file_dump) = chrs
 
 # This will not compute sub-domains, but save the intermediate_data that can be used to compute sub-domains latter on
 CALDER(contact_file_dump=contact_file_dump, 
-	chrs=chrs, 
-	bin_size=50E3,
-	ref_genome=NULL,
-	feature_track=feature_track,
-	save_dir=save_dir,
-	save_intermediate_data=FALSE,
-	n_cores=2,
-	sub_domains=FALSE)
-
-
+			chrs=chrs, 
+			bin_size=50E3,
+			ref_genome=NULL,
+			feature_track=feature_track,
+			save_dir=save_dir,
+			save_intermediate_data=FALSE,
+			n_cores=2,
+			sub_domains=FALSE)
 ```
 
 
