@@ -34,8 +34,7 @@ Note that this strategy is currently only available for `hg19`, `hg38`, `mm9` an
 
 ### Introduction of Calder analysis for other genomes
 
-Due to reasons such as low data quality or large scale structrual variation, compartments can be unreliablly called at one `bin_size` (equivalent to `resoltution` in the literature) but correctly called at another `bin_size`. We added an opitimized `bin_size` selection strategy to call reliable compartments. This strategey is based on the observation from our large scale compartment analysis (https://www.nature.com/articles/s41467-021-22666-3) that, although compartments can change between different conditions, their overall correlation `cor(compartment_rank_1, compartment_rank_2)` is high (> 0.4).
-
+Although Calder was mainly tested on human and mouse dataset, it can be appliabled on dataset from other genomes. 
 
 # Installation
 
