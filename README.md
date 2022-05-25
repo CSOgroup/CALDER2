@@ -34,7 +34,7 @@ Note that this strategy is currently only available for `hg19`, `hg38`, `mm9` an
 
 ### Introduction of Calder analysis for other genomes
 
-Although Calder was mainly tested on human and mouse dataset, it can be appliabled on dataset from other genomes. One additional information is required in such case: a `feature_track` 
+Although Calder was mainly tested on human and mouse dataset, it can be appliabled on dataset from other genomes. One additional information is required in such case: a `feature_track` that presumably having higher values in A than in B compartment. Some suggested tracks can be gene density, H3K27ac, H3K4me1, H3K4me2, H3K4me3, H3K36me3 (or negative transform of H3K9me3 signals)
 
 # Installation
 
