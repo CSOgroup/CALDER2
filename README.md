@@ -15,10 +15,10 @@ CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from w
 
 ## Introduction of opitimized `bin_size` selection
 
-Due to reasons such as low data quality or large scale structrual variation, compartments can be unreliablly called at one `bin_size` (equivalent to `resoltution` in the literature) but correctly called at another `bin_size`. We added an opitimized `bin_size` selection strategy to call reliable compartments. This strategey is based on the observation from our large scale compartment analysis that, although compartments can change between different conditions, their overall correlation `cor(compartment_rank_1, compartment_rank_2)` is high (> 0.4) (https://www.nature.com/articles/s41467-021-22666-3).
+Due to reasons such as low data quality or large scale structrual variation, compartments can be unreliablly called at one `bin_size` (equivalent to `resoltution` in the literature) but correctly called at another `bin_size`. We added an opitimized `bin_size` selection strategy to call reliable compartments. This strategey is based on the observation from our large scale compartment analysis (https://www.nature.com/articles/s41467-021-22666-3) that, although compartments can change between different conditions, their overall correlation `cor(compartment_rank_1, compartment_rank_2)` is high (> 0.4).
 <br>
 <br>
-Given a `bin_size` specified by user, we call compartments with extended `bin_sizes` and choose the smallest `bin_size` such that no bigger `bin_size` can increase the correclation with a reference compartment more than 0.05. For example, if correclation for `bin_size=10000` is 0.2 while for `bin_size=50000` is 0.6, we are more confident the latter is more reliable; if correclation for `bin_size=10000` is 0.5 while for `bin_size=50000` is 0.52, we would choose the former as it has higher resolution.
+The strategy: given a `bin_size` specified by user, we call compartments with extended `bin_sizes` and choose the smallest `bin_size` such that no bigger `bin_size` can increase the correclation with a reference compartment more than 0.05. For example, if correclation for `bin_size=10000` is 0.2 while for `bin_size=50000` is 0.6, we are more confident the latter is more reliable; if correclation for `bin_size=10000` is 0.5 while for `bin_size=50000` is 0.52, we would choose the former as it has higher resolution.
 <br>
 <br>
 `bin_size` is extended in the following way such that we can aggregated directly from the input contact matrix into larger `bin_sizes`
