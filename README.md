@@ -13,7 +13,7 @@ CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from w
 * Aggregated all chromosome output into a single file for easier visualization in IGV
 * Added output in tabular .txt format at bin level for easier downstream analysis
 
-### -- Introduction of opitimized `bin_size` selection
+### Introduction of opitimized `bin_size` selection
 
 Due to reasons such as low data quality or large scale structrual variation, compartments can be unreliablly called at one `bin_size` (equivalent to `resoltution` in the literature) but correctly called at another `bin_size`. We added an opitimized `bin_size` selection strategy to call reliable compartments. This strategey is based on the observation from our large scale compartment analysis (https://www.nature.com/articles/s41467-021-22666-3) that, although compartments can change between different conditions, their overall correlation `cor(compartment_rank_1, compartment_rank_2)` is high (> 0.4).
 <br>
@@ -32,7 +32,7 @@ if(bin_size==50E3) bin_sizes = c(50E3, 100E3)
 ```
 Note that this strategy is currently only available for `hg19`, `hg38`, `mm9` and `mm10` genome for which we generated high quality reference compartments using Hi-C data from: GSE63525 for `hg19`, https://data.4dnucleome.org/files-processed/4DNFI1UEG1HD/ for `hg38`, GSM3959427 for `mm9`, http://hicfiles.s3.amazonaws.com/external/bonev/CN_mapq30.hic for `mm10`.
 
-### -- Introduction of CALDER analysis for other genomes
+### Introduction of CALDER analysis for other genomes
 
 Although CALDER was mainly tested on human and mouse dataset, it can be applied to dataset from other genomes. One additional information is required in such case: a `feature_track` presumably positively correlated with compartment score (thus higher values in A than in B compartment). This information will be used for correctly determing the `A/B` direction. Some suggested tracks are gene density, H3K27ac, H3K4me1, H3K4me2, H3K4me3, H3K36me3 (or negative transform of H3K9me3) signals. Note that this information will not alter the hierarchical compartment/TAD structure, and can come from any external study with matched genome. An example of `feature_track` is given in the **Usage** section.
 
