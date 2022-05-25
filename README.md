@@ -283,6 +283,7 @@ save_dir/
 ### File description:
 
 * The `sub_domains` folder stores the final nested boundaries information
+
 | Name              | Description |  
 | --------------------- | ----------------------- |
 | **all_sub_compartments.bed**                | a .bed file containing the optimal sub-compartment information for all `chrs`, that can be visualized in IGV. Different colors were used to distinguish compartments (at the resolution of 8 sub-compartments)
