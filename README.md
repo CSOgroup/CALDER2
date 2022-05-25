@@ -163,21 +163,25 @@ hic_file = 'HMEC_combined_30.hic' ## can be downloaded from https://ftp.ncbi.nlm
 # This will not compute sub-domains, but save the intermediate_data that can be used to compute sub-domains latter on
 CALDER(contact_file_hic=hic_file, 
 			chrs=chrs, 
-			bin_size=50E3,
-			ref_genome=NULL,
-			feature_track=feature_track,
+			bin_size=10E3,
+			genome='hg19',
 			save_dir=save_dir,
 			save_intermediate_data=FALSE,
 			n_cores=2,
 			sub_domains=FALSE)
 ```
 
-### Example four:
+### Example four: run CALDER on other genomes
 ```
+library(rtracklayer)
+feature_track  = import('ENCFF934YOE.bigWig') ## from ENCODE
+feature_track = data.table::as.data.table(feature_track)[, c(1:3, 6)]
+
 chrs = c(21:22)
 contact_file_dump = as.list(system.file("extdata", sprintf("mat_chr%s_10kb_ob.txt.gz", chrs),
 			package='CALDER'))
 names(contact_file_dump) = chrs
+
 
 # This will not compute sub-domains, but save the intermediate_data that can be used to compute sub-domains latter on
 CALDER(contact_file_dump=contact_file_dump, 
