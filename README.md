@@ -116,14 +116,16 @@ A demo dataset is included in the repository `CALDER/inst/extdata/mat_chr22_10kb
 
 CALDER contains three modules: (1) compute chromatin domains; (2) derive their hierarchical organization and obtain sub-compartments; (3) compute nested sub-domains within each compartment domain.
 
-### Example one:
+### Example one: use contact matrix file in dump format as input
 ```
 chrs = c(21:22)
+
+## demo contact matrices in dump format
 contact_file_dump = as.list(system.file("extdata", sprintf("mat_chr%s_10kb_ob.txt.gz", chrs),
 			package='CALDER'))
 names(contact_file_dump) = chrs
 
-# This will not compute sub-domains, but save the intermediate_data that can be used to compute sub-domains latter on
+# Run CALDER to compute compartments
 CALDER(contact_file_dump=contact_file_dump, 
 			chrs=chrs, 
 			bin_size=10E3,
@@ -134,7 +136,7 @@ CALDER(contact_file_dump=contact_file_dump,
 			sub_domains=FALSE)
 ```
 
-### Example two:
+### Example two: use an R list of contact matrices in dump format as input
 ```
 chrs = c(21:22)
 contact_file_dump = as.list(system.file("extdata", sprintf("mat_chr%s_10kb_ob.txt.gz", chrs),
@@ -153,18 +155,17 @@ CALDER(contact_tab_dump=contact_tab_dump,
 			sub_domains=FALSE)
 ```
 
-### Example three:
+### Example three: use .hic file as input
 ```
 chrs = c(21:22)
-contact_file_dump = as.list(system.file("extdata", sprintf("mat_chr%s_10kb_ob.txt.gz", chrs),
-			package='CALDER'))
-names(contact_file_dump) = chrs
+hic_file = 'HMEC_combined_30.hic' ## can be downloaded from https://ftp.ncbi.nlm.nih.gov/geo/series/GSE63nnn/GSE63525/suppl/GSE63525_HMEC_combined_30.hic
 
 # This will not compute sub-domains, but save the intermediate_data that can be used to compute sub-domains latter on
-CALDER(contact_file_dump=contact_file_dump, 
+CALDER(contact_file_hic=hic_file, 
 			chrs=chrs, 
-			bin_size=10E3,
-			genome=NULL,
+			bin_size=50E3,
+			ref_genome=NULL,
+			feature_track=feature_track,
 			save_dir=save_dir,
 			save_intermediate_data=FALSE,
 			n_cores=2,
