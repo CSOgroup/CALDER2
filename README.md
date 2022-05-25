@@ -39,7 +39,6 @@ Although CALDER was mainly tested on human and mouse dataset, it can be applied 
 rtracklayer
 
 	chr	start	end	score
-	chr1	1	534178	0
 	chr1	534179	534353	2.80512
 	chr1	534354	572399	0
 	chr1	572400	572574	2.80512
