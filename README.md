@@ -145,6 +145,25 @@ CALDER_sub_domains(intermediate_data_file,
 				   bin_size) 
 ```
 
+### Example one:
+```
+chrs = c(21:22)
+contact_file_dump = as.list(system.file("extdata", sprintf("mat_chr%s_10kb_ob.txt.gz", chrs), package='CALDER'))
+names(contact_file_dump) = chrs
+
+# This will not compute sub-domains, but save the intermediate_data that can be used to compute sub-domains latter on
+CALDER_main(contact_mat_file, 
+			chr, 
+			bin_size, 
+			out_dir, 
+			sub_domains=FALSE, 
+			save_intermediate_data=TRUE,
+			genome='hg19') 
+
+```
+
+
+
 ### Paramters:
 
 | Name              | Description |  
