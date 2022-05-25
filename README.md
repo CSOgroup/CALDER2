@@ -286,24 +286,16 @@ save_dir/
 * The `sub_compartments` folder stores the final compartment information
 * The `intermediate_data` folder stores intermediate information at each of the extended `bin_sizes`
 
-#### chrxx_domain_hierachy.tsv
-* information of compartment domain and their hierarchical organization. The hierarchical structure is fully represented by `compartment_label`, for example, `B.2.2.2` and `B.2.2.1` are two sub-branches of `B.2.2`. The `pos_end` column specifies all compartment domain borders, except when it is marked as `gap`, which indicates it is the border of a gap chromsome region that has too few contacts and was excluded from the analysis (e.g., due to low mappability, deletion, technique flaw) 
 
-#### chrxx_sub_compartments.bed
-* a .bed file containing the sub-compartment information, that can be visualized in IGV. Different colors were used to distinguish compartments (at the resolution of 8 sub-compartments)  
-
-#### chrxx_domain_boundaries.bed
-* a .bed file containing the chromatin domains boundaries, that can be visualized in IGV
-
-#### chrxx_nested_boundaries.bed
-* a .bed file containing the nested sub-domain boundaries, that can be visualized in IGV
-
-#### chrxx_intermediate_data.Rds
-* an Rds file storing the intermediate_data that can be used to compute nested sub-domains (if CALDER is run in two seperated steps)
-
-#### chrxx_log.txt, chrxx_sub_domains_log.txt
-* log file storing the status and running time of each step
-
+| Name              | Description |  
+| --------------------- | ----------------------- |
+| **chrxx_domain_hierachy.tsv**                | information of compartment domain and their hierarchical organization. The hierarchical structure is fully represented by `compartment_label`, for example, `B.2.2.2` and `B.2.2.1` are two sub-branches of `B.2.2`. The `pos_end` column specifies all compartment domain borders, except when it is marked as `gap`, which indicates it is the border of a gap chromsome region that has too few contacts and was excluded from the analysis (e.g., due to low mappability, deletion, technique flaw) 
+| **.tsv**                | 
+| **chrxx_sub_compartments.bed**                | a .bed file containing the sub-compartment information, that can be visualized in IGV. Different colors were used to distinguish compartments (at the resolution of 8 sub-compartments)
+| **chrxx_domain_boundaries.bed**                | a .bed file containing the chromatin domains boundaries, that can be visualized in IGV
+| **chrxx_nested_boundaries.bed**                | a .bed file containing the nested sub-domain boundaries, that can be visualized in IGV
+| **chrxx_intermediate_data.Rds**                | an Rds file storing the intermediate_data that can be used to compute nested sub-domains (if CALDER is run in two seperated steps)
+| **chrxx_log.txt, chrxx_sub_domains_log.txt**                | log file storing the status and running time of each step
 
 
 The saved .bed files can be view directly through IGV:
