@@ -146,7 +146,7 @@ CALDER(contact_file_dump=contact_file_dump,
 			bin_size=10E3,
 			genome='hg19',
 			save_dir=save_dir,
-			save_intermediate_data=FALSE,
+			save_intermediate_data=TRUE,
 			n_cores=2,
 			sub_domains=TRUE)
 ```
@@ -253,42 +253,51 @@ CALDER(contact_file_dump=contact_file_dump,
 ## Output Structure
 The output of the workflow is stored in the folder specified by `--save_dir` ("results" by default) and will look like this:
 ```
-CALDER_dev_output/
-|-- [   37]  intermediate_data
-|   `-- [   56]  sub_compartments
-|       |-- [ 4.0K]  100kb
-|       |   |-- [ 2.6K]  chr21_domain_boundaries.bed
-|       |   |-- [ 2.1K]  chr21_domain_hierachy.tsv
-|       |   |-- [  518]  chr21_log.txt
-|       |   |-- [ 3.4K]  chr21_sub_compartments.bed
-|       |   |-- [ 2.7K]  chr22_domain_boundaries.bed
-|       |   |-- [ 2.2K]  chr22_domain_hierachy.tsv
-|       |   |-- [  517]  chr22_log.txt
-|       |   `-- [ 3.5K]  chr22_sub_compartments.bed
-|       |-- [ 4.0K]  10kb
-|       |   |-- [  13K]  chr21_domain_boundaries.bed
-|       |   |-- [  11K]  chr21_domain_hierachy.tsv
-|       |   |-- [  494]  chr21_log.txt
-|       |   |-- [  18K]  chr21_sub_compartments.bed
-|       |   |-- [  15K]  chr22_domain_boundaries.bed
-|       |   |-- [  13K]  chr22_domain_hierachy.tsv
-|       |   |-- [  494]  chr22_log.txt
-|       |   `-- [  21K]  chr22_sub_compartments.bed
-|       `-- [ 4.0K]  50kb
-|           |-- [ 5.3K]  chr21_domain_boundaries.bed
-|           |-- [ 4.4K]  chr21_domain_hierachy.tsv
-|           |-- [  519]  chr21_log.txt
-|           |-- [ 7.0K]  chr21_sub_compartments.bed
-|           |-- [ 5.4K]  chr22_domain_boundaries.bed
-|           |-- [ 4.5K]  chr22_domain_hierachy.tsv
-|           |-- [  519]  chr22_log.txt
-|           `-- [ 7.3K]  chr22_sub_compartments.bed
-`-- [ 4.0K]  sub_compartments
-    |-- [  39K]  all_sub_compartments.bed
-    |-- [ 430K]  all_sub_compartments.tsv
-    |-- [   47]  cor_with_ref.ALL.txt
-    |-- [ 5.1K]  cor_with_ref.pdf
-    `-- [   24]  cor_with_ref.txt
+save_dir/
+|-- intermediate_data
+|   |-- sub_compartments
+|   |   |-- 100kb
+|   |   |   |-- chr21_domain_boundaries.bed
+|   |   |   |-- chr21_domain_hierachy.tsv
+|   |   |   |-- chr21_log.txt
+|   |   |   |-- chr21_sub_compartments.bed
+|   |   |   |-- chr22_domain_boundaries.bed
+|   |   |   |-- chr22_domain_hierachy.tsv
+|   |   |   |-- chr22_log.txt
+|   |   |   `-- chr22_sub_compartments.bed
+|   |   |-- 10kb
+|   |   |   |-- chr21_domain_boundaries.bed
+|   |   |   |-- chr21_domain_hierachy.tsv
+|   |   |   |-- chr21_intermediate_data.Rds
+|   |   |   |-- chr21_log.txt
+|   |   |   |-- chr21_sub_compartments.bed
+|   |   |   |-- chr22_domain_boundaries.bed
+|   |   |   |-- chr22_domain_hierachy.tsv
+|   |   |   |-- chr22_intermediate_data.Rds
+|   |   |   |-- chr22_log.txt
+|   |   |   `-- chr22_sub_compartments.bed
+|   |   `-- 50kb
+|   |       |-- chr21_domain_boundaries.bed
+|   |       |-- chr21_domain_hierachy.tsv
+|   |       |-- chr21_log.txt
+|   |       |-- chr21_sub_compartments.bed
+|   |       |-- chr22_domain_boundaries.bed
+|   |       |-- chr22_domain_hierachy.tsv
+|   |       |-- chr22_log.txt
+|   |       `-- chr22_sub_compartments.bed
+|   `-- sub_domains
+|       |-- chr21_nested_boundaries.bed
+|       |-- chr21_sub_domains_log.txt
+|       |-- chr22_nested_boundaries.bed
+|       `-- chr22_sub_domains_log.txt
+|-- sub_compartments ## final sub-compartments
+|   |-- all_sub_compartments.bed
+|   |-- all_sub_compartments.tsv
+|   |-- cor_with_ref.ALL.txt
+|   |-- cor_with_ref.pdf
+|   `-- cor_with_ref.txt
+`-- sub_domains ## all nested boundaries
+    `-- all_nested_boundaries.bed
 ```
 
 The saved .bed files can be view directly through IGV:
