@@ -303,15 +303,15 @@ save_dir/
 | **chrxx_sub_compartments.bed**                | a .bed file containing the compartment information, that can be visualized in IGV. Different colors were used to distinguish compartments (at the resolution of 8 sub-compartments)
 | **chrxx_domain_boundaries.bed**                | a .bed file containing the chromatin domains boundaries, that can be visualized in IGV
 | **chrxx_nested_boundaries.bed**                | a .bed file containing the nested sub-domain boundaries, that can be visualized in IGV
-| **chrxx_intermediate_data.Rds**                | an Rds file storing the intermediate_data that can be used to compute nested sub-domains (if CALDER is run in two seperated steps)
-| **chrxx_log.txt, chrxx_sub_domains_log.txt**                | log file storing the status and running time of each step
+| **chrxx_intermediate_data.Rds**                | an Rds file storing the intermediate_data that can be used to compute nested sub-domains
+| **chrxx_log.txt, chrxx_sub_domains_log.txt**                | log files storing the status and running time of each step
 
 
-The saved .bed files can be view directly through IGV:
+All .bed files can be view directly through IGV:
 
 ![Alt text](./img/IGV_results.png "IGV")
 
-### Runnig time:
+# Runnig time:
 For the computational requirement, running CALDER on the GM12878 Hi-C dataset at bin size of 40kb took **36 minutes** to derive the chromatin domains and their hierarchy for all chromosomes (i.e., CALDER Step1 and Step2); **13 minutes** to derive the nested sub-domains (i.e., CALDER Step3). At the bin size of 10kb, it took **1 h 44 minutes and 55 minutes** correspondingly (server information: 40 cores, 64GB Ram, Intel(R) Xeon(R) Silver 4210 CPU @ 2.20GHz). The evaluation was done using a single core although CALDER can be run in a parallel manner.
 
 # Citation
