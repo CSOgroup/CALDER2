@@ -21,7 +21,7 @@ Due to reasons such as low data quality or large scale structrual variation, com
 **The strategy**: given a `bin_size` specified by user, we call compartments with extended `bin_sizes` and choose the smallest `bin_size` such that no bigger `bin_size` can increase the compartment correclation with a reference compartment more than 0.05. For example, if correclation for `bin_size=10000` is 0.2 while for `bin_size=50000` is 0.6, we are more confident the latter is more reliable; if correclation for `bin_size=10000` is 0.5 while for `bin_size=50000` is 0.52, we would choose the former as it has higher resolution.
 <br>
 <br>
-`bin_size` is extended in the following way thus to aggregate directly from the input contact matrix into larger `bin_sizes`, without the need to provide additional contact matrices at the user side
+`bin_size` is extended in the following way thus to aggregate directly from the input contact matrix into larger `bin_sizes`, without the need to provide additional contact matrices from user side
 ```
 if(bin_size==5E3) bin_sizes = c(5E3, 10E3, 50E3, 100E3)
 if(bin_size==10E3) bin_sizes = c(10E3, 50E3, 100E3)
@@ -30,7 +30,7 @@ if(bin_size==25E3) bin_sizes = c(25E3, 50E3, 100E3)
 if(bin_size==40E3) bin_sizes = c(40E3, 80E3)
 if(bin_size==50E3) bin_sizes = c(50E3, 100E3)
 ```
-Note that this strategy is currently only available for `hg19`, `hg38`, `mm9` and `mm10` genome for which we generated high quality reference compartments, using Hi-C data: from GSE63525 for `hg19`, from https://data.4dnucleome.org/files-processed/4DNFI1UEG1HD/ for `hg38`, from GSM3959427 for `mm9`, from http://hicfiles.s3.amazonaws.com/external/bonev/CN_mapq30.hic for `mm10`.
+Note that this strategy is currently only available for `hg19`, `hg38`, `mm9` and `mm10` genome for which we generated high quality reference compartments using Hi-C data from: GSE63525 for `hg19`, https://data.4dnucleome.org/files-processed/4DNFI1UEG1HD/ for `hg38`, GSM3959427 for `mm9`, http://hicfiles.s3.amazonaws.com/external/bonev/CN_mapq30.hic for `mm10`.
 
 
 # Installation
