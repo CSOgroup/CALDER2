@@ -294,7 +294,7 @@ save_dir/
 
 
 
-* The `intermediate_data` folder stores intermediate information at each of the extended `bin_sizes`
+* The `intermediate_data` folder stores information at each of the extended `bin_sizes` for each chromosome
 
 
 | Name              | Description |  
