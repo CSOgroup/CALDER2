@@ -1,5 +1,4 @@
 
-	
  	## k-means with replicatable seeds
  	my_kmeans = function(iter.max=1E3, nstart=50, ...)
  	{

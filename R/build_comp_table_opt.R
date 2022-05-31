@@ -1,8 +1,7 @@
 	
+	## function to obtain the optimal compartment calling from various resolutions (bin_sizes)
 
-	
-	
-	build_comp_table_opt = function(save_dir, chrs, bin_sizes, with_ref) ## function to obtain the optimal compartment calling from various resolutions (= bin_sizes)
+	build_comp_table_opt = function(save_dir, chrs, bin_sizes, with_ref) 
 	{
 
     	`%dopar%` <- foreach::`%dopar%`

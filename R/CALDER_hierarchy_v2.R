@@ -119,12 +119,12 @@
 		# }
 
 
-		CALDER_CD_hierarchy_v2 = function(contact_tab_dump=NULL, contact_file_dump=NULL, contact_file_hic=NULL, chr, bin_size_input, bin_size2look, save_dir, save_intermediate_data=FALSE, swap_AB, ref_compartment_file, black_list_bins=NULL, annotation_track=NULL)
+		CALDER_CD_hierarchy_v2 = function(contact_tab_dump=NULL, contact_file_dump=NULL, contact_file_hic=NULL, chr, bin_size_input, bin_size2look, save_dir, save_intermediate_data=FALSE, swap_AB, ref_compartment_file, black_list_bins=NULL, feature_track=NULL)
 		{
 			chr_num = gsub('chr', '', chr, ignore.case=TRUE)
 			chr_name = paste0('chr', chr_num)
 
-		    get_cor_with_ref = function(chr_bin_pc, bin_size, ref_compartment_file=NULL, annotation_track=NULL) ## correlation of PC1 with comp. domain rank of ref_genome
+		    get_cor_with_ref = function(chr_bin_pc, bin_size, ref_compartment_file=NULL, feature_track=NULL) ## correlation of PC1 with comp. domain rank of genome
 		    {
 		        ext_chr_bin_pc = function(chr_bin_pc) ## spand chr_bin_pc using 5kb bin
 		        {
@@ -138,10 +138,10 @@
 		        }
 
 		        ## function to generate binning scores // https://divingintogeneticsandgenomics.rbind.io/post/compute-averages-sums-on-granges-or-equal-length-bins/
-			 	# annotation_track = data.table::data.table(chr=as.vector(GenomicRanges::seqnames(bw_val)), start=start(bw_val), end=end(bw_val), score=bw_val$score)
+			 	# feature_track = data.table::data.table(chr=as.vector(GenomicRanges::seqnames(bw_val)), start=start(bw_val), end=end(bw_val), score=bw_val$score)
 
 
-			 	get_binned_vals = function(annotation_track_chr, bin_size=5E3)
+			 	get_binned_vals = function(feature_track_chr, bin_size=5E3)
 			 	{
 			 		## helper to compute binned average // https://divingintogeneticsandgenomics.rbind.io/post/compute-averages-sums-on-granges-or-equal-length-bins/
 			  		binnedMean <- function(bins, numvar, mcolname)
@@ -162,7 +162,7 @@
 					}
 
 
-			 		GR = GenomicRanges::makeGRangesFromDataFrame(annotation_track_chr, keep.extra.columns=TRUE)
+			 		GR = GenomicRanges::makeGRangesFromDataFrame(feature_track_chr, keep.extra.columns=TRUE)
 			 		GR_chrs = split(GR, GenomicRanges::seqnames(GR))
 			 		seq_lens = sapply(GR_chrs, function(v) max(end(v)))
 
@@ -191,12 +191,12 @@
 			        ref_tab = ref_tab[, c(1,2,5)]
 		        }
 
-		        if(!is.null(annotation_track)) 
+		        if(!is.null(feature_track)) 
 		        {
-		        	colnames(annotation_track) = c('chr', 'start', 'end', 'score')
-		        	annotation_track$chr = gsub('chr', '', annotation_track$chr)
-		        	annotation_track_chr = annotation_track[annotation_track$chr==chr_num, ]
-		        	ref_tab = get_binned_vals(annotation_track_chr)
+		        	colnames(feature_track) = c('chr', 'start', 'end', 'score')
+		        	feature_track$chr = gsub('chr', '', feature_track$chr)
+		        	feature_track_chr = feature_track[feature_track$chr==chr_num, ]
+		        	ref_tab = get_binned_vals(feature_track_chr)
 		        }
 
 
@@ -300,13 +300,13 @@
 				
 
 				if(!is.null(ref_compartment_file)) cor_with_ref = try(get_cor_with_ref(chr_bin_pc, bin_size2look, ref_compartment_file=ref_compartment_file)) ## get correlation with supplied "ground truth or reference"
-				if(is.null(ref_compartment_file)) cor_with_ref = try(get_cor_with_ref(chr_bin_pc, bin_size2look, annotation_track=annotation_track))
+				if(is.null(ref_compartment_file)) cor_with_ref = try(get_cor_with_ref(chr_bin_pc, bin_size2look, feature_track=feature_track))
 
 
 
 				if(class(cor_with_ref)=='try-error') cor_with_ref = 1 ## psudo cor
 	        	if(!is.null(ref_compartment_file)) cat('\r', ">>>> Correlation between PC1 and reference compartment is :", format(abs(cor_with_ref), digits=5), '\n')
-	        	if(is.null(ref_compartment_file)) cat('\r', ">>>> Correlation between PC1 and annotation_track is :", format(abs(cor_with_ref), digits=5), '\n')
+	        	if(is.null(ref_compartment_file)) cat('\r', ">>>> Correlation between PC1 and feature_track is :", format(abs(cor_with_ref), digits=5), '\n')
 
 				PC_direction = PC_direction*sign(cor_with_ref)
 			    if(swap_AB==1) PC_direction = -PC_direction ## force swap PC direction if in some case the A/B direction is reverted
@@ -352,7 +352,7 @@
 	        cat('\r', '>>>> Finish compute compartment domains and their hierachy at: ', as.character(Sys.time()))
 
 	       	if(!is.null(ref_compartment_file)) cat('Correlation between PC1 and reference compartment domain rank on this chr is: ', format(abs(cor_with_ref), 1, 5), '\n', file=log_file, append=TRUE)
-	       	if(is.null(ref_compartment_file)) cat('Correlation between PC1 and annotation_track on this chr is: ', format(abs(cor_with_ref), 1, 5), '\n', file=log_file, append=TRUE)	       	
+	       	if(is.null(ref_compartment_file)) cat('Correlation between PC1 and feature_track on this chr is: ', format(abs(cor_with_ref), 1, 5), '\n', file=log_file, append=TRUE)	       	
 
 	       	# cat(sprintf("chr%s: %s\n", chr, format(abs(cor_with_ref), 1, 5)), file=cor_log_file, append=TRUE)
 	       	# if(abs(cor_with_ref) < 0.3) cat('WARNING: correlation between PC1 and reference compartment domain rank on this chr is: ', format(cor_with_ref, digits=5), ', which is a bit low. Possible reason could be that this chromosome has some big structural variations (translocation, inversion for example). We suggest to overlay the compartment track with the hic map together with histone modification or gene expression track to double check the reliability of compartment calling on this chr.', '\n', file=warning_file)
@@ -372,3 +372,149 @@
 			# cat(intermediate_data_file)
 			return(intermediate_data_file)
 		}
+
+
+
+
+
+		project_to_major_axis <- function(PC_12_atanh)
+		{
+			Data = data.frame(x=PC_12_atanh[,1], y=PC_12_atanh[,2])
+			Data = Data[order(Data$x),]
+			loess_fit <- loess(y ~ x, Data)
+
+			more_x = seq(min(PC_12_atanh[,1]), max(PC_12_atanh[,1]), len=10*length(PC_12_atanh[,1]))
+			major_axis = cbind(x=more_x, y=predict(loess_fit, newdata=more_x))
+			new_x_axis = cumsum(c(0, sqrt(diff(major_axis[,1])^2 + diff(major_axis[,2])^2))) ## the new xaxis on the curved major_axis
+
+			dis = fields::rdist(PC_12_atanh[, 1:2], major_axis)
+			projected_x = new_x_axis[apply(dis, 1, which.min)]
+			names(projected_x) = rownames(PC_12_atanh)
+			# projected_x = major_axis[apply(dis, 1, which.min)]
+			project_info = list(x_pro=projected_x, major_axis=major_axis)
+			return(project_info)
+		}
+
+
+		get_best_reorder <- function(hc_hybrid_x_pro, x_pro)
+		{
+			n = length(x_pro)
+			reordered_names_x_pro_list = list()
+
+			reordered_names_x_pro_list[[1]] = reorder_dendro(hc_hybrid_x_pro, (x_pro), aggregateFun=mean) ## here the clusters are assigned into A.1 A.2 B.1 B.2
+
+			best_index = which.max(sapply(reordered_names_x_pro_list, function(v) cor(1:n, unname(rank(x_pro, ties.method='first')[v]))))
+			return(reordered_names_x_pro_list[[1]])
+		}
+
+
+
+		generate_hierachy_bed = function(chr, res, save_dir, bin_size)
+		{
+			chr_name = paste0('chr', chr)
+			# res = reses[[chr_name]][[CELL_LINE]]
+			hc = res$CALDER_hc
+
+			hc_k_labels_full = try(get_cluser_levels(hc, k_clusters=Inf, balanced_4_clusters=FALSE)$cluster_labels)
+			bin_comp = data.table::data.table(chr=chr, bin_index=as.numeric(res$bin_names), comp=rep(hc_k_labels_full, sapply(res$initial_clusters, length)))
+			chr_bin_domain = bin_comp
+			chr_bin_domain$chr = paste0('chr', chr_bin_domain$chr)
+
+			# chr_bin_domain = chr_bin_domain[order(bin_index)]
+
+			compartment_info_tab = create_compartment_bed_v4(chr_bin_domain, bin_size=bin_size)
+
+			boundaries = unname(sapply(res$initial_clusters, max))
+			boundaries_ori = as.numeric(res$bin_names[boundaries])*bin_size
+
+			compartment_info_tab$is_boundary = 'gap'
+			compartment_info_tab[compartment_info_tab$pos_end %in% boundaries_ori, 'is_boundary'] = 'boundary'
+			
+			colnames(compartment_info_tab)[4] = 'compartment_label'
+			compartments_tsv_file = paste0(save_dir, '/chr', chr, '_domain_hierachy.tsv')
+			compartments_bed_file = paste0(save_dir, '/chr', chr, '_sub_compartments.bed')
+			boundary_bed_file = paste0(save_dir, '/chr', chr, '_domain_boundaries.bed')
+
+			options(scipen=999)
+			write.table( compartment_info_tab, file=compartments_tsv_file, quote=FALSE, sep='\t', row.names=FALSE )
+
+
+			comp_cols = c("#FF0000", "#FF4848", "#FF9191", "#FFDADA", "#DADAFF", "#9191FF", "#4848FF", "#0000FF") 	
+			names(comp_cols) = c('A.1.1', 'A.1.2', 'A.2.1', 'A.2.2', 'B.1.1', 'B.1.2', 'B.2.1', 'B.2.2')
+			comp_val = (8:1)/8
+			names(comp_val) = names(comp_cols)
+
+			comp_8 = substr(compartment_info_tab$compartment_label, 1, 5)
+
+			compartment_bed = data.frame(chr=paste0('chr', compartment_info_tab$chr), compartment_info_tab[, 2:4], comp_val[comp_8], '.', compartment_info_tab[, 2:3], comp_cols[comp_8])
+			write.table( compartment_bed, file=compartments_bed_file, quote=FALSE, sep='\t', row.names=FALSE, col.names=FALSE )
+
+			bounday_bed_raw = subset(compartment_info_tab, is_boundary=='boundary')
+			bounday_bed = data.frame(chr=paste0('chr', compartment_info_tab$chr), compartment_info_tab[,3], compartment_info_tab[,3], '', '.', compartment_info_tab[,3], compartment_info_tab[,3], '#000000')
+			write.table( bounday_bed, file=boundary_bed_file, quote=FALSE, sep='\t', row.names=FALSE, col.names=FALSE )
+		}
+
+
+		create_compartment_bed_v4 = function(chr_bin_domain, bin_size)
+		{
+			# for( chr in chrs )
+			{
+				v = chr_bin_domain
+				# v$intra_domain = as.character(6 - (as.numeric(v$intra_domain))) ## invert the labeling
+				# v$intra_domain = names(cols)[(as.numeric(v$intra_domain))]
+				v = v[order(v$bin_index), ]
+
+
+				borders_non_consecutive = which(diff(v$bin_index)!=1)
+				borders_domain = cumsum(rle(v$comp)$lengths)
+				borders = sort(union(borders_non_consecutive, borders_domain))
+				bins = v$bin_index
+				to_id = as.numeric(bins[borders])
+				from_id = as.numeric(bins[c(1, head(borders, length(borders)-1)+1)])
+
+				pos_start = (from_id-1)*bin_size + 1
+				pos_end = to_id*bin_size
+				# chr = as.numeric( gsub('chr', '', v$chr) )
+				chr = gsub('chr', '', v$chr) ## no need for as.numeric, also makes it compatible with chrX
+
+				compartment_info_tab = data.frame(chr=rep(unique(chr), length(pos_start)), pos_start=pos_start, pos_end=pos_end, domain=v$comp[borders])
+			}
+			return(compartment_info_tab)
+		}
+
+
+		CALDER_sub_domains = function(intermediate_data_file=NULL, intermediate_data=NULL, chr, save_dir, bin_size)
+		{	
+		    time0 = Sys.time()
+		    log_file = paste0(save_dir, '/chr', chr, '_sub_domains_log.txt')
+
+		   	cat('\r', '>>>> Begin compute sub-domains at:', as.character(Sys.time()))
+		   	cat('>>>> Begin compute sub-domains at:', as.character(Sys.time()), '\n', file=log_file, append=FALSE)
+
+			if(is.null(intermediate_data)) intermediate_data = readRDS(intermediate_data_file)
+			{
+
+			    if(intermediate_data$chr!=chr) stop('intermediate_data$chr!=chr; check your input parameters\n') 
+			    if( !setequal(rownames(intermediate_data$mat), intermediate_data$bin_names) ) stop('!setequal(rownames(intermediate_data$mat), intermediate_data$bin_names) \n')     
+			    compartment_segs = generate_compartment_segs( intermediate_data$initial_clusters )
+
+				cat('\r', '>>>> Begin compute sub-domains within each compartment domain at:', as.character(Sys.time()))   			
+				cat('>>>> Begin compute sub-domains within each compartment domain at:', as.character(Sys.time()), '\n', file=log_file, append=TRUE)
+
+				sub_domains_raw = HRG_zigzag_compartment_domain_main_fun(intermediate_data$mat, './', compartment_segs, min_n_bins=2)   
+
+			    no_output = post_process_sub_domains(chr, sub_domains_raw, ncores=1, out_dir=save_dir, bin_size=bin_size)
+
+			    cat('>>>> Finish compute sub-domains within each compartment domain at:', as.character(Sys.time()), '\n', file=log_file, append=TRUE)
+			    cat('\r', '>>>> Finish compute sub-domains within each compartment domain at:', as.character(Sys.time()), '\n')
+
+			   	time1 = Sys.time()
+		        # delta_time  = gsub('Time difference of', 'Total time used for computing compartment domains and their hierachy:', print(time1 - time0))
+		        delta_time <- time1 - time0
+				timediff <- format(round(delta_time, 2), nsmall = 2)
+
+		        cat('\n\n', 'Total time used for computing sub-domains:', timediff, '\n', file=log_file, append=TRUE)
+			}
+			# return(NULL)
+		}
+
