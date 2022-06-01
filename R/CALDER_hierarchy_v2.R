@@ -237,7 +237,6 @@
 	        p_thresh = ifelse(bin_size2look < 40000, 0.05, 1)
 	        window.sizes = 3
 	        compartments = vector("list", 2)
-	        chr_name = paste0("chr", chr)
 
 	        cat('>>>> Begin compute compartment domains and their hierachy at:', as.character(Sys.time()), '\n', file=log_file, append=TRUE)
 	        cat('\r', '>>>> Begin compute compartment domains and their hierachy at:', as.character(Sys.time()))

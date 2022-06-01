@@ -39,7 +39,7 @@
 
 			## try different normalization to get available dataset
 
-			contact_mat_raw = try(strawr::dump("KR", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
+			contact_mat_raw = try(strawr::straw("KR", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
 			if(class(contact_mat_raw)=='try-error' | (class(contact_mat_raw)!='try-error' & nrow(na.omit(contact_mat_raw)) < 100)) contact_mat_raw = try(strawr::dump("VC_SQRT", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
 			if(class(contact_mat_raw)=='try-error' | (class(contact_mat_raw)!='try-error' & nrow(na.omit(contact_mat_raw)) < 100)) contact_mat_raw = try(strawr::dump("VC", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
 			if(class(contact_mat_raw)=='try-error' | (class(contact_mat_raw)!='try-error' & nrow(na.omit(contact_mat_raw)) < 100)) stop(sprintf('Your provided hic file does not contain information given the bin_size=%s and any of the normalization method KR/VC/VC_SQRT', bin_size_input))	
