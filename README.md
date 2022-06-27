@@ -64,7 +64,7 @@ Although CALDER was mainly tested on human and mouse dataset, it can be applied 
 
 ## Clone its repository and install it from source:
 
-`git clone https://github.com/CSOgroup/CALDER.git`
+`git clone https://github.com/CSOgroup/CALDER2.0.git`
 
 `install.packages(path_to_CALDER, repos = NULL, type="source")` ## install from the cloned source file
 
