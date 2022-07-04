@@ -79,7 +79,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 
 BiocManager::install("GenomicRanges")
 install.packages("remotes")
-remotes::install_github("CSOgroup/CALDER")
+remotes::install_github("CSOgroup/CALDER2.0")
 ```
 
 # Usage
