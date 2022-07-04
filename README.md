@@ -223,7 +223,7 @@ CALDER(contact_file_dump=contact_file_dump,
 | **save_dir**             | the directory to be created for saving outputs
 | **bin_size**         | The bin_size (resolution) to run CALDER. `bin_size` should be consistent with the data resolution in `contact_file_dump` or `contact_tab_dump` if these files are provided as input, otherwise `bin_size` should exist in `contact_file_hic`. Recommended `bin_size` is between **10000 to 100000**
 | **single_binsize_only**     |  logical. If TRUE, CALDER will compute compartments only using the bin_size specified by the user and not do bin size optimization
-| **feature_track**                | A genomic feature track in `data.frame` or `data.table` format. This track will be used for determining the A/B compartment direction when `genome=others` and should presumably have higher values in A than in B compartment. Some suggested tracks can be gene density, H3K27ac, H3K4me1, H3K4me2, H3K4me3, H3K36me3 (or negative transform of H3K9me3 signals)
+| **feature_track**                | A genomic feature track in `data.frame` or `data.table` format. This track will be used for determining the A/B compartment direction when `genome='others'` and should presumably have higher values in A than in B compartment. Some suggested tracks can be gene density, H3K27ac, H3K4me1, H3K4me2, H3K4me3, H3K36me3 (or negative transform of H3K9me3 signals)
 | **save_intermediate_data**  | logical. If TRUE, an intermediate_data will be saved. This file can be used for computing nested sub-domains later on
 | **n_cores**     |  integer. Number of cores to be registered for running CALDER in parallel
 | **sub_domains**     |  logical, whether to compute nested sub-domains
