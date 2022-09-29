@@ -11,6 +11,10 @@
 	# HRG_zigzag_compartment_domain_main_fun <- function(A, res_dir, compartment_segs, allowed_max_nbins_seq, max_nbins_fine, chr, min_n_bins=2)
 	HRG_zigzag_compartment_domain_main_fun <- function(A, res_dir, compartment_segs, allowed_max_nbins_seq=NULL, max_nbins_fine=NULL, min_n_bins=2)
 	{
+
+		`%dopar%` <- foreach::`%dopar%`
+			`%do%` <- foreach::`%do%`
+			
 		arg_list = as.list(environment())
 		
 		res_folder = file.path(res_dir)
