@@ -12,8 +12,8 @@ Authors@R: c(
            family = "LIU",
            role = c("aut", "cre"),
            email = "yliueagle@googlemail.com"))
-URL: https://github.com/CSOgroup/CALDER
-BugReports: https://github.com/CSOgroup/CALDER/issues
+URL: https://github.com/CSOgroup/CALDER2
+BugReports: https://github.com/CSOgroup/CALDER2/issues
 License: MIT
 Encoding: UTF-8
 Depends:
