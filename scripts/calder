@@ -1,0 +1,164 @@
+#!/usr/bin/env Rscript
+
+suppressPackageStartupMessages(library(optparse))
+suppressPackageStartupMessages(library(CALDER))
+
+AVAILABLE_REFERENCE_TRACKS_GENOMES <- c("hg19", "hg38", "mm9", "mm10")
+INPUT_TYPES <- c("hic", "cool")
+HIC_CHROMS_TO_REMOVE <- c("ALL", "M", "MT", "Y")
+COOL_CHROMS_TO_REMOVE <- c("MT", "M", 'chrMT', 'chrM', 'Y', 'chrY')
+
+
+parse_arguments <- function(){
+	# Creating the argument parsing options
+	option_list = list(
+	  make_option(c("-i", "--input"), action="store", default=NA, type='character',
+	              help="Input Hi-C contacts"),
+	  make_option(c("-t", "--type"), action="store", default='hic', type='character',
+	              help="The type of input: hic or cool [default %default]"),
+	  make_option(c("-b", "--bin_size"), action="store", default=50000, type='integer',
+	              help="Bin size to use for the analysis [default %default]"),
+	  make_option(c("-g", "--genome"), action="store", default="hg19", type='character',
+	              help="Genome assembly to use [default %default]"),
+	  make_option(c("-f", "--feature_track"), action="store", default=NA, type='character',
+	              help="Genomic feature track to be used to determine A/B compartment direction
+	              when genome == 'others'. The track should presumably have higher values
+	              in A than in B compartmnets. [default %default]"),
+	  make_option(c("-p", "--nproc"), action="store", default=1, type='integer',
+	              help="Number of cores to use [default %default]"),
+	  make_option(c("-o", "--outpath"), action="store", default=NA, type='character',
+	              help="Path to the output folder"),
+	  make_option(c("-k", "--keep_intermediate"), action="store_true", default=FALSE, type='logical',
+	              help="Keep intermediate data after done [default %default]")
+	)
+	parser <- OptionParser(usage = "%prog [options]", option_list=option_list)
+	opt <- parse_args(parser)
+
+	# Checking if input path exists
+	if(is.na(opt$input)){
+		print_help(parser)
+		stop(paste0("Input path (", opt$input,") does not exist"))
+	}
+
+	# Checking if output path is provided
+	if(is.na(opt$outpath)){
+		stop("Output path was not provided")
+	}
+
+	# Check that the input type is one of the possible ones
+	if(!(opt$type %in% INPUT_TYPES)){
+		stop(paste0("Input type ", opt$input_type, " not available"))
+	}
+
+	# Check if the provided genome is in the list of available reference genomes 
+	# or if a feature track is provided
+	if((!(opt$genome %in% AVAILABLE_REFERENCE_TRACKS_GENOMES)) || (file.exists(opt$feature_track))){
+		# in this case, we just assign it the name 'others'
+		opt$genome = "others"
+	}
+
+	writeLines(c(
+		"*******************************",
+		"*            CALDER           *",
+		"*******************************",
+		paste0("[Parameters] Input: ", opt$input),
+		paste0("[Parameters] Input type: ", opt$type),
+		paste0("[Parameters] Bin size: ", opt$bin_size),
+		paste0("[Parameters] Genome: ", opt$genome),
+		paste0("[Parameters] N. cores: ", opt$nproc),
+		paste0("[Parameters] Output: ", opt$outpath)
+	))
+
+	return(opt)
+}
+
+sanitize_chroms <- function(chroms){
+	res <- lapply(chroms, function(x){
+		if(startsWith(x, "chr")){
+			return(substring(x, 4))
+		} else{
+			return(x)
+		}
+	})
+	return(res)
+}
+
+handle_input_hic <- function(opt){
+	suppressPackageStartupMessages(library(strawr))
+	chromsizes <- readHicChroms(opt$input)
+	chroms <- chromsizes[!(chromsizes$name %in% HIC_CHROMS_TO_REMOVE), "name"]
+	CALDER(contact_file_hic = opt$input,
+		   chrs = chroms,
+		   bin_size = opt$bin_size,
+		   genome = opt$genome,
+		   save_dir=opt$outpath,
+		   save_intermediate_data=TRUE,
+		   single_binsize_only=TRUE,
+		   n_cores = opt$nproc,
+		   sub_domains=TRUE)
+}
+
+handle_input_cool <- function(opt){
+	intermediate_data_dir = file.path(opt$outpath, "intermediate_data")
+	dir.create(intermediate_data_dir, recursive=TRUE, showWarnings=FALSE)
+
+	system(paste0("cooler dump --table chroms --out ", 
+				  file.path(intermediate_data_dir, "chroms.txt"), 
+				  " --header ", 
+				  opt$input))
+	chroms <- read.table(file.path(intermediate_data_dir, "chroms.txt"), sep="\t", header=TRUE)
+	chroms <- chroms[!(chroms$name %in% COOL_CHROMS_TO_REMOVE), "name"]
+
+	dump_paths <- list()
+	for(chrom in chroms){
+		cat(paste0("[Pre-processing] Dumping ", chrom, "\n"))
+		chrom_dump_path <- file.path(intermediate_data_dir, paste0(chrom, "_dump.txt"))
+		dump_paths <- c(dump_paths, chrom_dump_path)
+		if(! file.exists(chrom_dump_path)){
+			system(paste0("cooler dump --table pixels --range ", 
+						  chrom, 
+						  " --join --balanced ",
+						  opt$input,
+						  " | cut -f2,5,8 | awk '{if ($3) print;}' > ",
+						  chrom_dump_path))
+		}
+	}
+
+	chroms <- sanitize_chroms(chroms)
+	names(dump_paths) <- chroms
+
+	CALDER(contact_file_dump=dump_paths, 
+		   chrs=chroms, 
+		   bin_size=opt$bin_size,
+		   genome=opt$genome,
+		   save_dir=opt$outpath,,
+		   single_binsize_only=TRUE,
+		   save_intermediate_data=TRUE,
+		   n_cores=opt$nproc,
+		   sub_domains=TRUE)
+
+}
+
+opt <- parse_arguments()
+
+
+if(opt$type == "hic"){
+	handle_input_hic(opt)
+} else if(opt$type == "cool"){
+	handle_input_cool(opt)
+} else {
+	stop("Unknown input type")
+}
+
+# Cleaning the output
+intermediate_data_dir = file.path(opt$outpath, "intermediate_data")
+if(dir.exists(intermediate_data_dir) && (!opt$keep_intermediate)){
+	cat('[Post-processing] Removing intermediate data\n')
+	unlink(intermediate_data_dir, recursive=TRUE)
+}
+exec_time_file = "./total_execution.time"
+if(file.exists(exec_time_file)){
+	cat("[Post-processing] Removing total_execution.time\n")
+	file.remove(exec_time_file)
+}
+
