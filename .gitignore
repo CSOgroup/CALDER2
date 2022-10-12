@@ -1,6 +1,9 @@
 ### CUSTOM ###
 total_execution.time
 
+### TESTING ###
+_snaps/
+
 ### R ###
 
 # History files

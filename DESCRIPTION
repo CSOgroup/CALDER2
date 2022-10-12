@@ -36,3 +36,6 @@ Imports:
 	rhdf5 (>= 2.28.0),
 	ggplot2 (>= 3.3.5)
 RoxygenNote: 7.1.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
