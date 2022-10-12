@@ -35,7 +35,7 @@ Imports:
 	GenomicRanges (>= 1.36.0),
 	strawr (>= 0.0.9),
 	rhdf5 (>= 2.28.0),
-	ggplot2 (>= 3.3.5)
+	ggplot2 (>= 3.3.5),
 	optparse
 RoxygenNote: 7.1.2
 Suggests: 
