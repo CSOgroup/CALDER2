@@ -9,7 +9,9 @@ LATEST_TAG=$(curl --silent "https://api.github.com/repos/${GITHUB_REPO}/releases
 echo "Building Docker for ${GITHUB_REPO} at ${DOCKERHUB_USERNAME}/${PACKAGE_NAME}:${LATEST_TAG}"
 
 docker build . \
-			-t ${DOCKERHUB_USERNAME}/${PACKAGE_NAME}:${LATEST_TAG} \
-			-f ${DOCKER_FILE} \
-			--build-arg tag_name=${LATEST_TAG} \
-			--build-arg repo_name=${GITHUB_REPO}
+            -t ${DOCKERHUB_USERNAME}/${PACKAGE_NAME}:${LATEST_TAG} \
+            -f ${DOCKER_FILE} \
+            --build-arg tag_name=${LATEST_TAG} \
+            --build-arg repo_name=${GITHUB_REPO}
+
+docker push ${DOCKERHUB_USERNAME}/${PACKAGE_NAME}:${LATEST_TAG}
