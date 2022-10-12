@@ -18,6 +18,7 @@ License: MIT
 Encoding: UTF-8
 Depends:
     R (>= 3.5.2)
+biocViews:
 Imports: 
 	R.utils (>= 2.9.0),
 	doParallel (>= 1.0.15),
