@@ -23,10 +23,10 @@ RUN ln -s $(realpath ${calder_cmd}) /bin/
 # Removing tar file
 RUN rm ${github_tag}.tar.gz
 
-# # Install latest release of the package
-RUN R -e "remotes::install_github('CSOgroup/CALDER2@*release'); if (!library(CALDER, logical.return=T)) quit(status=10)"
+# # Install the package
+RUN R -e "remotes::install_local('CALDER2-${github_tag}', dependencies=T); if (!library(CALDER, logical.return=T)) quit(status=10)"
 
 # # Install other packages
 RUN pip install cooler 
 
-CMD ["R"]
+CMD ["bash"]
