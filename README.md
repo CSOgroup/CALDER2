@@ -1,3 +1,5 @@
+[![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](http://bioconda.github.io/recipes/r-calder2/README.html)
+
 # CALDER user manual
 
 CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from whole chromosome contacts; (2) derive their non-linear hierarchical organization and obtain sub-compartments; (3) compute nested sub-domains within each chromatin domain from short-range contacts. CALDER is currently implemented in R.
@@ -44,7 +46,15 @@ Although CALDER was mainly tested on human and mouse dataset, it can be applied 
 
 # Installation
 
-## Make sure all dependencies have been installed:
+## Installing from conda
+The easiest way to get the package is to install from [Bioconda](https://bioconda.github.io/index.html):
+```
+conda install --channel bioconda r-calder2
+```
+
+## Installing from source
+
+### Make sure all dependencies have been installed:
 
 * R.utils (>= 2.9.0),
 * doParallel (>= 1.0.15),
@@ -62,16 +72,20 @@ Although CALDER was mainly tested on human and mouse dataset, it can be applied 
 * ggplot2 (>= 3.3.5)
 * strawr (>= 0.0.9)
 
-## Clone its repository and install it from source:
+### Clone its repository and install it from source:
 
-`git clone https://github.com/CSOgroup/CALDER2.0.git`
+On the command line:
+```
+git clone https://github.com/CSOgroup/CALDER2.git
+cd CALDER2
+```
+Then, once inside of the `R` interpreter:
+```
+install.packages(".", repos = NULL, type="source") # install from the cloned source file
+```
 
-`install.packages(path_to_CALDER, repos = NULL, type="source")` ## install from the cloned source file
-
-
-Please contact yliueagle@googlemail.com for any questions about installation.
-
-## install CALDER and dependencies automaticly:
+### Install CALDER and dependencies automaticly:
+One can also install directly from Github, together with the dependencies as follows:
 
 ```
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -81,6 +95,10 @@ BiocManager::install("GenomicRanges")
 install.packages("remotes")
 remotes::install_github("CSOgroup/CALDER2.0")
 ```
+
+Please contact yliueagle@googlemail.com for any questions about installation.
+
+
 
 # Usage
 
