@@ -10,8 +10,10 @@ echo "Building Docker for ${GITHUB_REPO} at ${DOCKERHUB_USERNAME}/${PACKAGE_NAME
 
 docker build . \
             -t ${DOCKERHUB_USERNAME}/${PACKAGE_NAME}:${LATEST_TAG} \
+            -t ${DOCKERHUB_USERNAME}/${PACKAGE_NAME}:latest \
             -f ${DOCKER_FILE} \
             --build-arg tag_name=${LATEST_TAG} \
             --build-arg repo_name=${GITHUB_REPO}
 
 docker push ${DOCKERHUB_USERNAME}/${PACKAGE_NAME}:${LATEST_TAG}
+docker push ${DOCKERHUB_USERNAME}/${PACKAGE_NAME}:latest
