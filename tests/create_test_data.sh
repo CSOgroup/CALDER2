@@ -25,6 +25,21 @@ create_test_cool(){
 }
 
 
+create_test_mcool(){
+	cool_path=$1
+	outpath=$2
+	binsize=$3
+
+	if [[ ! -f ${outpath} ]]
+	then
+		cooler zoomify --resolutions ${binsize}N \
+					   --balance \
+					   --balance-args '--force --max-iters 1000' \
+					   --out ${outpath} ${cool_path}
+	fi
+}
+
+
 test_data_path="tests/testthat/data"
 
 mkdir -p ${test_data_path}
@@ -34,3 +49,6 @@ source_cool_file="https://data.4dnucleome.org/files-processed/4DNFI2EK1IOQ/@@dow
 test_cool_binsize=50000
 
 create_test_cool ${source_cool_file} ${test_data_path} ${test_cool_binsize}
+
+# Creating MCOOL from COOL
+create_test_mcool ${test_data_path}/test.cool ${test_data_path}/test.mcool ${test_cool_binsize}
