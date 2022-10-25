@@ -1,8 +1,12 @@
 [![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](http://bioconda.github.io/recipes/r-calder2/README.html)
+[![Docker Pulls](https://img.shields.io/docker/pulls/lucananni93/calder2?label=Docker%20image&logo=Docker&style=flat-square)](https://hub.docker.com/r/lucananni93/calder2)
+[![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A521.10.3-23aa62.svg?labelColor=000000)](https://www.nextflow.io/)
+[![nf-core](https://img.shields.io/badge/nf--core-calder2-green)](https://nf-co.re/modules/calder2)
 
 # CALDER user manual
 
-CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from whole chromosome contacts; (2) derive their non-linear hierarchical organization and obtain sub-compartments; (3) compute nested sub-domains within each chromatin domain from short-range contacts. CALDER is currently implemented in R.
+CALDER is a Hi-C analysis tool that allows: (1) compute chromatin dom
+ains from whole chromosome contacts; (2) derive their non-linear hierarchical organization and obtain sub-compartments; (3) compute nested sub-domains within each chromatin domain from short-range contacts. CALDER is currently implemented in R.
 
 * Overview of the CALDER method:
 ![Alt text](./img/CALDER_methods.png "CALDER methods")
@@ -22,6 +26,7 @@ CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from w
 Below we introduce two main updates:
 
 ### (1) Optimized `bin_size` selection
+
 
 Due to reasons such as low data quality or large scale structural variation, compartments can be unreliably called at one `bin_size` (equivalent to `resolution` in the literature) but properly called at another `bin_size`. We added an optimized `bin_size` selection strategy to call reliable compartments. This strategy is based on the observation from our large scale compartment analysis (https://www.nature.com/articles/s41467-021-22666-3), that although compartments can change between different conditions, their overall correlation `cor(compartment_rank_1, compartment_rank_2)` is high (> 0.4).
 <br>
@@ -98,6 +103,25 @@ remotes::install_github("CSOgroup/CALDER2.0")
 
 Please contact yliueagle@googlemail.com for any questions about installation.
 
+## Use as a docker container
+We provide a [Docker image](https://hub.docker.com/r/lucananni93/calder2) complete with all dependencies to run CALDER workflows.
+
+```
+# Pull the docker image from Dockerhub
+docker pull lucananni93/calder2
+
+# Run the image
+docker run -it lucananni93/calder2
+
+# Once inside the image we can run the command line Calder tool
+calder [options]
+
+# or we can just enter R 
+R
+
+# and load Calder
+library(CALDER)	
+```
 
 
 # Usage
