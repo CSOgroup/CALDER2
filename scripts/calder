@@ -5,8 +5,7 @@ suppressPackageStartupMessages(library(CALDER))
 
 AVAILABLE_REFERENCE_TRACKS_GENOMES <- c("hg19", "hg38", "mm9", "mm10")
 INPUT_TYPES <- c("hic", "cool")
-HIC_CHROMS_TO_REMOVE <- c("ALL", "M", "MT", "Y")
-COOL_CHROMS_TO_REMOVE <- c("MT", "M", 'chrMT', 'chrM', 'Y', 'chrY')
+CHROMS_TO_REMOVE <- c("ALL", "M", "chrM", "MT", "chrMT", "Y", "chrY")
 
 
 parse_arguments <- function(){
@@ -24,6 +23,8 @@ parse_arguments <- function(){
 	              help="Genomic feature track to be used to determine A/B compartment direction
 	              when genome == 'others'. The track should presumably have higher values
 	              in A than in B compartmnets. [default %default]"),
+	  make_option(c("-c", "--chromosomes"), action='store', default='all', type='character',
+	  			  help="Chromosomes to analyze, separated by comma. [default %default]"),
 	  make_option(c("-p", "--nproc"), action="store", default=1, type='integer',
 	              help="Number of cores to use [default %default]"),
 	  make_option(c("-o", "--outpath"), action="store", default=NA, type='character',
@@ -65,6 +66,7 @@ parse_arguments <- function(){
 		paste0("[Parameters] Input type: ", opt$type),
 		paste0("[Parameters] Bin size: ", opt$bin_size),
 		paste0("[Parameters] Genome: ", opt$genome),
+		paste0("[Parameters] Chromosomes: ", opt$chromosomes),
 		paste0("[Parameters] N. cores: ", opt$nproc),
 		paste0("[Parameters] Output: ", opt$outpath)
 	))
@@ -86,7 +88,7 @@ sanitize_chroms <- function(chroms){
 handle_input_hic <- function(opt){
 	suppressPackageStartupMessages(library(strawr))
 	chromsizes <- readHicChroms(opt$input)
-	chroms <- chromsizes[!(chromsizes$name %in% HIC_CHROMS_TO_REMOVE), "name"]
+	chroms <- chromsizes[!(toupper(chromsizes$name) %in% toupper(CHROMS_TO_REMOVE)), "name"]
 	CALDER(contact_file_hic = opt$input,
 		   chrs = chroms,
 		   bin_size = opt$bin_size,
@@ -107,8 +109,14 @@ handle_input_cool <- function(opt){
 				  " --header ", 
 				  opt$input))
 	chroms <- read.table(file.path(intermediate_data_dir, "chroms.txt"), sep="\t", header=TRUE)
-	chroms <- chroms[!(chroms$name %in% COOL_CHROMS_TO_REMOVE), "name"]
-
+	if(opt$chromosomes == "all"){
+		chroms <- chroms[!( toupper(chroms$name) %in% toupper(CHROMS_TO_REMOVE) ), "name"]
+	}
+	else{
+		chrom_list <- strsplit(opt$chromosomes, ",")[[1]]
+		chroms <- chroms[chroms$name %in% chrom_list, "name"]
+	}
+	
 	dump_paths <- list()
 	for(chrom in chroms){
 		cat(paste0("[Pre-processing] Dumping ", chrom, "\n"))
