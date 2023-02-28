@@ -30,7 +30,9 @@ parse_arguments <- function(){
 	  make_option(c("-o", "--outpath"), action="store", default=NA, type='character',
 	              help="Path to the output folder"),
 	  make_option(c("-k", "--keep_intermediate"), action="store_true", default=FALSE, type='logical',
-	              help="Keep intermediate data after done [default %default]")
+	              help="Keep intermediate data after done [default %default]"),
+	  make_option(c("-a", "--adaptive"), action="store_true", default=FALSE, type='logical',
+	              help="Use adaptive resolution choice [default %default]")
 	)
 	parser <- OptionParser(usage = "%prog [options]", option_list=option_list)
 	opt <- parse_args(parser)
@@ -66,9 +68,12 @@ parse_arguments <- function(){
 		paste0("[Parameters] Input type: ", opt$type),
 		paste0("[Parameters] Bin size: ", opt$bin_size),
 		paste0("[Parameters] Genome: ", opt$genome),
+		paste0("[Parameters] Feature Track: ", opt$feature_track),
 		paste0("[Parameters] Chromosomes: ", opt$chromosomes),
 		paste0("[Parameters] N. cores: ", opt$nproc),
-		paste0("[Parameters] Output: ", opt$outpath)
+		paste0("[Parameters] Output: ", opt$outpath),
+		paste0("[Parameters] Keep Intermediate data: ", opt$keep_intermediate),
+		paste0("[Parameters] Use adaptive resolution: ", opt$adaptive)
 	))
 
 	return(opt)
@@ -88,14 +93,21 @@ sanitize_chroms <- function(chroms){
 handle_input_hic <- function(opt){
 	suppressPackageStartupMessages(library(strawr))
 	chromsizes <- readHicChroms(opt$input)
-	chroms <- chromsizes[!(toupper(chromsizes$name) %in% toupper(CHROMS_TO_REMOVE)), "name"]
+	if(opt$chromosomes == "all"){
+		chroms <- chromsizes[!(toupper(chromsizes$name) %in% toupper(CHROMS_TO_REMOVE)), "name"]
+	}
+	else{
+		chrom_list <- strsplit(opt$chromosomes, ",")[[1]]
+		chroms <- chromsizes[chromsizes$name %in% chrom_list, "name"]
+	}
+	chroms <- sanitize_chroms(chroms)
 	CALDER(contact_file_hic = opt$input,
 		   chrs = chroms,
 		   bin_size = opt$bin_size,
 		   genome = opt$genome,
 		   save_dir=opt$outpath,
 		   save_intermediate_data=TRUE,
-		   single_binsize_only=TRUE,
+		   single_binsize_only=!opt$adaptive,
 		   n_cores = opt$nproc,
 		   sub_domains=TRUE)
 }
@@ -140,7 +152,7 @@ handle_input_cool <- function(opt){
 		   bin_size=opt$bin_size,
 		   genome=opt$genome,
 		   save_dir=opt$outpath,,
-		   single_binsize_only=TRUE,
+		   single_binsize_only=!opt$adaptive,
 		   save_intermediate_data=TRUE,
 		   n_cores=opt$nproc,
 		   sub_domains=TRUE)
