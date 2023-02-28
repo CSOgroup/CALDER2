@@ -61,12 +61,11 @@
 		# }
 
 		## changed to paralell, 2018-11-11
-		cat('\n')
 
 		res_inner = foreach::foreach(i=1:nrow(compartment_segs)) %do%
 		{
 			seg = compartment_segs[i,1]:compartment_segs[i,2]
-			cat('\r', sprintf('Find sub-domains in %d of %d CDs | length of current CD: %d bins', i, nrow(compartment_segs), length(seg)))
+			cat('\r', sprintf('Find sub-domains in %d of %d CDs | length of current CD: %d bins\n', i, nrow(compartment_segs), length(seg)))
 
 			A_seg = pA_sym[seg, seg]
 			res_zigzag = zigzag_loglik_ancestors_v4_5(A_seg, nrow(A_seg), min_n_bins=min_n_bins)
@@ -84,8 +83,8 @@
 		# save(res_info, file=file.path(res_folder_final, 'res_info.Rdata'))
 	
 		time_finish = Sys.time()
-		cat('Execution finishes:', as.character(time_finish), '\n\n', file=total_execution_time_file, append=TRUE)
-		cat('Total execution time:', capture.output( time_finish - time_begin ), '\n\n', file=total_execution_time_file, append=TRUE)
+		cat('Execution finishes:', as.character(time_finish), '\n', file=total_execution_time_file, append=TRUE)
+		cat('Total execution time:', capture.output( time_finish - time_begin ), '\n', file=total_execution_time_file, append=TRUE)
 	
 		return( res_info )
 	}

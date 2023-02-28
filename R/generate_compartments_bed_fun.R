@@ -2,8 +2,11 @@
 
 	generate_compartments_bed <- function(input_mat, p_thresh, out_file_name, chr, window.sizes=3, stat_window_size=NULL, bin_size)
 	{	
+
 		input_mat_extended = data.frame(chr=paste0('chr', chr), pos_start=0:(nrow(input_mat)-1), pos_end=1:nrow(input_mat), mat=input_mat)
+
 		res_input_mat = TopDom_v2(input_mat_extended, window.size=NULL, NULL, T, p_thresh=p_thresh, window.sizes=window.sizes, stat_window_size=stat_window_size, domain_size_min=NULL)
+		cat('[', as.character(chr),'] Computing compartments\n')
 		# return(res_input_mat)
 		to_id = as.numeric(rownames(input_mat)[res_input_mat$domain$to.id])
 		from_id = as.numeric(rownames(input_mat)[res_input_mat$domain$from.id])

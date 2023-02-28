@@ -221,17 +221,17 @@
 	        log_file = paste0(save_dir, '/chr', chr_num, '_log.txt')
 	        warning_file = paste0(save_dir, '/WARNING_chr', chr_num, '.txt')
 	        cor_log_file = paste0(save_dir, '/cor_with_ref.txt')
-	        cat('\n')
 
 	        cat('>>>> Begin process contact matrix and compute correlation score at:', as.character(Sys.time()), '\n', file=log_file, append=FALSE)
-	        cat('>>>> Begin process contact matrix and compute correlation score at:', as.character(Sys.time()), '\n')
+	        
+	        cat('[', as.character(chr),'] Begin process contact matrix and compute correlation score at:', as.character(Sys.time()), '\n')
 	        processed_data = contact_mat_processing_v2(contact_tab_dump, contact_file_dump=contact_file_dump, contact_file_hic=contact_file_hic, chr=chr_num, bin_size_input=bin_size_input, bin_size2look=bin_size2look, black_list_bins=black_list_bins)
 	     
 
 	        mat_dense = processed_data$mat_dense
 	        ccmat_dense_compressed_log_atanh = processed_data$atanh_score
 
-	        cat('\r', '>>>> Finish process contact matrix and compute correlation score at:', as.character(Sys.time()))
+	        cat('[', as.character(chr),'] Finish process contact matrix and compute correlation score at:', as.character(Sys.time()), '\n')
 	        cat('>>>> Finish process contact matrix and compute correlation score at:', as.character(Sys.time()), '\n', file=log_file, append=TRUE)
 
 	        p_thresh = ifelse(bin_size2look < 40000, 0.05, 1)
@@ -239,7 +239,7 @@
 	        compartments = vector("list", 2)
 
 	        cat('>>>> Begin compute compartment domains and their hierachy at:', as.character(Sys.time()), '\n', file=log_file, append=TRUE)
-	        cat('\r', '>>>> Begin compute compartment domains and their hierachy at:', as.character(Sys.time()))
+	        cat('[', as.character(chr),'] Begin compute compartment domains and their hierachy at:', as.character(Sys.time()), '\n')
 
 	        compartments[[2]] = generate_compartments_bed(chr = chr, bin_size = bin_size2look, window.sizes = window.sizes, ccmat_dense_compressed_log_atanh, p_thresh, out_file_name = NULL, stat_window_size = NULL)
 	        topDom_output = compartments[[2]]
@@ -304,8 +304,8 @@
 
 
 				if(class(cor_with_ref)=='try-error') cor_with_ref = 1 ## psudo cor
-	        	if(!is.null(ref_compartment_file)) cat('\r', ">>>> Correlation between PC1 and reference compartment is :", format(abs(cor_with_ref), digits=5), '\n')
-	        	if(is.null(ref_compartment_file)) cat('\r', ">>>> Correlation between PC1 and feature_track is :", format(abs(cor_with_ref), digits=5), '\n')
+	        	if(!is.null(ref_compartment_file)) cat('[', as.character(chr),'] Correlation between PC1 and reference compartment is :', format(abs(cor_with_ref), digits=5), '\n')
+	        	if(is.null(ref_compartment_file)) cat('[', as.character(chr),'] Correlation between PC1 and feature_track is :', format(abs(cor_with_ref), digits=5), '\n')
 
 				PC_direction = PC_direction*sign(cor_with_ref)
 			    if(swap_AB==1) PC_direction = -PC_direction ## force swap PC direction if in some case the A/B direction is reverted
@@ -348,7 +348,7 @@
 
 
 	        cat('>>>> Finish compute compartment domains and their hierachy at: ', as.character(Sys.time()), '\n', file=log_file, append=TRUE)
-	        cat('\r', '>>>> Finish compute compartment domains and their hierachy at: ', as.character(Sys.time()))
+	        cat('[', as.character(chr),'] Finish compute compartment domains and their hierachy at: ', as.character(Sys.time()), '\n')
 
 	       	if(!is.null(ref_compartment_file)) cat('Correlation between PC1 and reference compartment domain rank on this chr is: ', format(abs(cor_with_ref), 1, 5), '\n', file=log_file, append=TRUE)
 	       	if(is.null(ref_compartment_file)) cat('Correlation between PC1 and feature_track on this chr is: ', format(abs(cor_with_ref), 1, 5), '\n', file=log_file, append=TRUE)	       	
@@ -487,7 +487,7 @@
 		    time0 = Sys.time()
 		    log_file = paste0(save_dir, '/chr', chr, '_sub_domains_log.txt')
 
-		   	cat('\r', '>>>> Begin compute sub-domains at:', as.character(Sys.time()))
+		   	cat('[', as.character(chr),']Begin compute sub-domains at:', as.character(Sys.time()))
 		   	cat('>>>> Begin compute sub-domains at:', as.character(Sys.time()), '\n', file=log_file, append=FALSE)
 
 			if(is.null(intermediate_data)) intermediate_data = readRDS(intermediate_data_file)
@@ -497,7 +497,7 @@
 			    if( !setequal(rownames(intermediate_data$mat), intermediate_data$bin_names) ) stop('!setequal(rownames(intermediate_data$mat), intermediate_data$bin_names) \n')     
 			    compartment_segs = generate_compartment_segs( intermediate_data$initial_clusters )
 
-				cat('\r', '>>>> Begin compute sub-domains within each compartment domain at:', as.character(Sys.time()))   			
+				cat('[', as.character(chr),'] Begin compute sub-domains within each compartment domain at:', as.character(Sys.time()), '\n')   			
 				cat('>>>> Begin compute sub-domains within each compartment domain at:', as.character(Sys.time()), '\n', file=log_file, append=TRUE)
 
 				sub_domains_raw = HRG_zigzag_compartment_domain_main_fun(intermediate_data$mat, './', compartment_segs, min_n_bins=2)   
@@ -505,7 +505,7 @@
 			    no_output = post_process_sub_domains(chr, sub_domains_raw, ncores=1, out_dir=save_dir, bin_size=bin_size)
 
 			    cat('>>>> Finish compute sub-domains within each compartment domain at:', as.character(Sys.time()), '\n', file=log_file, append=TRUE)
-			    cat('\r', '>>>> Finish compute sub-domains within each compartment domain at:', as.character(Sys.time()), '\n')
+			    cat('[', as.character(chr),'] Finish compute sub-domains within each compartment domain at:', as.character(Sys.time()), '\n')
 
 			   	time1 = Sys.time()
 		        # delta_time  = gsub('Time difference of', 'Total time used for computing compartment domains and their hierachy:', print(time1 - time0))
