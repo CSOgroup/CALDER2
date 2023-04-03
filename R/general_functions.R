@@ -1151,7 +1151,7 @@ get_tree_decoration = function( single_res_info, decoration=TRUE, distr, n_param
         assign_twins_name <- function(graph, node)
         {
             twins = igraph::ego(graph, node, mode='out', order=1, mindist=1)[[1]]$name
-            igraph::V(graph)[twins]$level_name = paste0(igraph::V(graph)[node]$level_name, '.', c(2,1))
+            if(length(twins)==2) igraph::V(graph)[twins]$level_name = paste0(igraph::V(graph)[node]$level_name, '.', c(2,1))
             if(node==igraph::V(graph)[1]$name) igraph::V(graph)[twins]$level_name = c('B', 'A')
             return(graph)
         }
