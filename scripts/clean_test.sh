@@ -8,8 +8,8 @@ mamba create --yes --name ${TEST_ENV_NAME} --channel bioconda --channel conda-fo
 		r-essentials r-devtools cooler r-nloptr
 conda activate ${TEST_ENV_NAME}
 
-R -e "devtools::install('.', dependencies=TRUE)"
+R -e "devtools::install('.', dependencies=TRUE, Ncpus = 20)"
 R -e "devtools::test()"
 
-conda deactivate 
+# conda deactivate 
 mamba env remove --yes --name ${TEST_ENV_NAME}
