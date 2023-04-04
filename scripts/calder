@@ -76,6 +76,10 @@ parse_arguments <- function(){
 		paste0("[Parameters] Use adaptive resolution: ", opt$adaptive)
 	))
 
+	if(file.exists(opt$feature_track)){
+		opt$feature_track <- read.table(opt$feature_track)
+	}
+
 	return(opt)
 }
 
@@ -107,6 +111,7 @@ handle_input_hic <- function(opt){
 		   genome = opt$genome,
 		   save_dir=opt$outpath,
 		   save_intermediate_data=TRUE,
+		   feature_track=opt$feature_track,
 		   single_binsize_only=!opt$adaptive,
 		   n_cores = opt$nproc,
 		   sub_domains=TRUE)
@@ -151,7 +156,8 @@ handle_input_cool <- function(opt){
 		   chrs=chroms, 
 		   bin_size=opt$bin_size,
 		   genome=opt$genome,
-		   save_dir=opt$outpath,,
+		   save_dir=opt$outpath,
+		   feature_track=opt$feature_track,
 		   single_binsize_only=!opt$adaptive,
 		   save_intermediate_data=TRUE,
 		   n_cores=opt$nproc,
