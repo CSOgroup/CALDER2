@@ -148,30 +148,30 @@
 					{
 					  stopifnot(is(bins, "GRanges"))
 					  stopifnot(is(numvar, "RleList"))
-					  stopifnot(identical(seqlevels(bins), names(numvar)))
-					  bins_per_chrom <- split(ranges(bins), GenomicRanges::seqnames(bins))
+					  stopifnot(identical(GenomeInfoDb::seqlevels(bins), names(numvar)))
+					  bins_per_chrom <- split(GenomicRanges::ranges(bins), GenomicRanges::seqnames(bins))
 					  sums_list <- lapply(names(numvar),
 					      function(seqname) {
-					          views <- Views(numvar[[seqname]],
+					          views <- IRanges::Views(numvar[[seqname]],
 					                         bins_per_chrom[[seqname]])
-					          viewMeans(views)
+					          IRanges::viewMeans(views)
 					      })
 					  new_mcol <- unsplit(sums_list, as.factor(GenomicRanges::seqnames(bins)))
-					  mcols(bins)[[mcolname]] <- new_mcol
-					  bins
+					  GenomicRanges::mcols(bins)[[mcolname]] <- new_mcol
+					  return(bins)
 					}
 
 
 			 		GR = GenomicRanges::makeGRangesFromDataFrame(feature_track_chr, keep.extra.columns=TRUE)
 			 		GR_chrs = split(GR, GenomicRanges::seqnames(GR))
-			 		seq_lens = sapply(GR_chrs, function(v) max(end(v)))
+			 		seq_lens = sapply(GR_chrs, function(v) max(GenomicRanges::end(v)))
 
 					GR_RleList = GenomicRanges::coverage(GR, weight="score")
 					seq_info = GenomicRanges::seqinfo(GR_RleList)
 					GenomeInfoDb::seqlengths(seq_info) = seq_lens
 
 					bins = GenomicRanges::tileGenome(seq_info, tilewidth=bin_size, cut.last.tile.in.chrom=TRUE)
-					bins = bins[width(bins)==bin_size]
+					bins = bins[GenomicRanges::width(bins)==bin_size]
 					bin_val_tmp = binnedMean(bins, GR_RleList, "bin_val")
 					bin_val_tmp = data.table::as.data.table(bin_val_tmp)
 					bin_val = data.table::data.table(chr=bin_val_tmp$seqnames, bin_index=bin_val_tmp$end / bin_size, continous_rank=log2(1 + bin_val_tmp$bin_val - min(bin_val_tmp$bin_val)))
