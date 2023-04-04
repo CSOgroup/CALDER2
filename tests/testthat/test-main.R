@@ -39,3 +39,16 @@ test_that("CALDER works with dumps", {
     unlink(output_path, recursive=TRUE)
 })
 
+test_that("CALDER works with custom feature track", {
+    input_cool_path <- file.path(testthat::test_path("data"), "test.cool")
+    feature_track_path <- file.path(testthat::test_path("data"), "test_gene_coverage.bed")
+    output_path <- testthat::test_path("test-main-featuretrack-out")
+
+    CMD = paste0(CALDER_CLI, " -i ", input_cool_path, " -t cool -g hg38 -o ", output_path, " -f ", feature_track_path)
+    system(CMD)
+
+    expect_snapshot_file(file.path(output_path, "sub_compartments", "all_sub_compartments.bed"), name = "TestFeatureTrack_all_sub_compartments.bed")
+    expect_snapshot_file(file.path(output_path, "sub_compartments", "all_sub_compartments.tsv"), name = "TestFeatureTrack_all_sub_compartments.tsv")
+    expect_snapshot_file(file.path(output_path, "sub_domains", "all_nested_boundaries.bed"), name = "TestFeatureTrack_all_nested_boundaries.bed")
+    unlink(output_path, recursive=TRUE)
+})
