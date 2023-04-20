@@ -31,7 +31,7 @@
 		if(!is.null(contact_file_hic)) ## if contact matrix in hic format is provided
 		{
 			bin_sizes_in_hic = strawr::readHicBpResolutions(contact_file_hic)
-			chrs_in_hic = as.vector(strawr::readHicChroms(contact_file_hic)[[1]])
+			chrs_in_hic = as.vector(strawr::readHicChroms(contact_file_hic)[["name"]])
 			chr2query = chrs_in_hic[match(toupper(chr_num), gsub('chr', '', toupper(chrs_in_hic), ignore.case=TRUE))]
 
 			if(!(bin_size_input %in% bin_sizes_in_hic)) stop(sprintf('Your provided hic file only contains resolutions of: %s', paste0(bin_sizes_in_hic, collapse=' ')))
@@ -40,8 +40,8 @@
 			## try different normalization to get available dataset
 
 			contact_mat_raw = try(strawr::straw("KR", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
-			if(class(contact_mat_raw)=='try-error' | (class(contact_mat_raw)!='try-error' & nrow(na.omit(contact_mat_raw)) < 100)) contact_mat_raw = try(strawr::dump("VC_SQRT", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
-			if(class(contact_mat_raw)=='try-error' | (class(contact_mat_raw)!='try-error' & nrow(na.omit(contact_mat_raw)) < 100)) contact_mat_raw = try(strawr::dump("VC", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
+			if(class(contact_mat_raw)=='try-error' | (class(contact_mat_raw)!='try-error' & nrow(na.omit(contact_mat_raw)) < 100)) contact_mat_raw = try(strawr::straw("VC_SQRT", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
+			if(class(contact_mat_raw)=='try-error' | (class(contact_mat_raw)!='try-error' & nrow(na.omit(contact_mat_raw)) < 100)) contact_mat_raw = try(strawr::straw("VC", contact_file_hic, as.character(chr2query), as.character(chr2query), "BP", bin_size_input))
 			if(class(contact_mat_raw)=='try-error' | (class(contact_mat_raw)!='try-error' & nrow(na.omit(contact_mat_raw)) < 100)) stop(sprintf('Your provided hic file does not contain information given the bin_size=%s and any of the normalization method KR/VC/VC_SQRT', bin_size_input))	
 			contact_mat_raw = data.table::as.data.table(contact_mat_raw)
 		}
