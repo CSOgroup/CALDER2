@@ -13,9 +13,10 @@ CALDER is a Hi-C analysis tool that allows: (1) compute chromatin domains from w
 * Calder connects chromatin 3D organization to genomic function:
 ![Alt text](./img/CALDER_features.png "CALDER features")
 
-## A note with with respect to PC-based method
+## (A note on the performance of Calder vs PC)
 
-* Overview of the CALDER method:
+* Except for being able to identify non-linear sub-compartments, Calder demonstrates superior robustness over PC-based approach in identifying meaningful compartments, particularly when faced with complex chromosomal structural variations (figure on the left) and loose interaction between the p and q arms (figure on the right)
+
 ![Alt text](./img/Hela_chr11_and_RWPE1_chr9_pq.png "Hela_chr11_and_RWPE1_chr9_pq")
 
 
