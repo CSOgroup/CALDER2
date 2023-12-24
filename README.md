@@ -75,7 +75,6 @@ conda install --channel bioconda r-calder2
 * Matrix (>= 1.2.17),
 * rARPACK (>= 0.11.0),
 * factoextra (>= 1.0.5),
-* maptools (>= 0.9.5),
 * data.table (>= 1.12.2),
 * fields (>= 9.8.3),
 * GenomicRanges (>= 1.36.0)
